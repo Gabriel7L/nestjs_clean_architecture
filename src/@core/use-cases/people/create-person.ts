@@ -11,7 +11,6 @@ export default class CreatePerson {
   ) {
     const personId = crypto.randomUUID();
     const data = People.create(props, personId);
-    console.log(data);
     const person = await this.peopleRepo.savePerson(data);
     return person;
   }
