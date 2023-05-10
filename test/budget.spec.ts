@@ -1,12 +1,10 @@
 import CreateBudget from '../src/@core/use-cases/budget/create-budget';
 import BudgetInMemoryRepository from '../src/@core/db/repositories/in-memory/budget/budget-in-memory.repository';
 import GetBudget from '../src/@core/use-cases/budget/get-budget-';
-import PeopleInMemoryRepository from '../src/@core/db/repositories/in-memory/people/people-in-memory.repository';
 
 test('Should be able to create a budget', async function () {
   const budgetRepo = new BudgetInMemoryRepository();
-  const peopleRepo = new PeopleInMemoryRepository();
-  const createBudget = new CreateBudget(budgetRepo, peopleRepo);
+  const createBudget = new CreateBudget(budgetRepo);
   const budget = await createBudget.create(
     10,
     '10ce1f94-66d0-44d3-af8d-393312f5cbe5',
@@ -18,8 +16,7 @@ test('Should be able to create a budget', async function () {
 
 test('Should be ablet to get a created budget by unique identifier', async function () {
   const budgetRepo = new BudgetInMemoryRepository();
-  const peopleRepo = new PeopleInMemoryRepository();
-  const createBudget = new CreateBudget(budgetRepo, peopleRepo);
+  const createBudget = new CreateBudget(budgetRepo);
   const budgetData = await createBudget.create(
     10,
     '10ce1f94-66d0-44d3-af8d-393312f5cbe5',

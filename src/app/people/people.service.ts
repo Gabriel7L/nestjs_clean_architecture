@@ -25,7 +25,7 @@ export class PeopleService {
   }
 
   update(id: number, updatePersonDto: UpdatePersonDto) {
-    return `This action updates a #${id} person`;
+    return `This action updates a ${id} ${updatePersonDto.document} person`;
   }
 
   remove(id: number) {
