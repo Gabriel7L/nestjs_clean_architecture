@@ -1,4 +1,3 @@
-import { HttpException } from '@nestjs/common';
 import { IBudgetRepository } from 'src/@core/domain/budget/ibudget.repository';
 
 export default class CreateBudget {
