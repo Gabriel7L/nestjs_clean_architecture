@@ -43,10 +43,6 @@ export default class People extends Basic {
     >,
     id?: string,
   ) {
-    if (!props.document) {
-      console.log(props);
-      return;
-    }
     return new People(props, id);
   }
   validate_document(document: string): string {
