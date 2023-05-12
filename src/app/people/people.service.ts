@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
-import CreatePerson from 'src/@core/use-cases/people/create-person';
-import GetPerson from 'src/@core/use-cases/people/get-person-by-id';
-import GetPeople from 'src/@core/use-cases/people/get-people';
+import CreatePerson from '@use-cases/people/create-person';
+import GetPerson from '@use-cases/people/get-person-by-id';
+import GetPeople from '@use-cases/people/get-people';
 
 @Injectable()
 export class PeopleService {
@@ -13,7 +13,10 @@ export class PeopleService {
     private getPeople: GetPeople,
   ) {}
   create(createPersonDto: CreatePersonDto) {
-    return this.createPerson.createPerson(createPersonDto);
+    return this.createPerson.createPerson(
+      createPersonDto,
+      createPersonDto.addresses,
+    );
   }
 
   async findAll() {

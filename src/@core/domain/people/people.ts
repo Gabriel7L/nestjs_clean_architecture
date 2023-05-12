@@ -1,55 +1,41 @@
-import { cnpj, cpf } from 'cpf-cnpj-validator';
 import crypto from 'crypto';
 import Addresses from '../addresses/addresses';
 import { Basic } from '../basic/basic';
-import { HttpException } from '@nestjs/common';
+import ValidateDocument from '../utils/validations/document-validations';
+
 export default class People extends Basic {
   document: string;
   name: string;
   dt_birth: Date;
-  addresses: Omit<
-    Addresses,
-    | 'id_person'
-    | 'id'
-    | 'created_at'
-    | 'updated_at'
-    | 'person'
-    | 'convertStringToEnum'
-  >[];
+  addresses: Addresses[];
   private constructor(
-    props: Omit<
-      People,
-      'id' | 'validate_document' | 'created_at' | 'updated_at'
-    >,
+    props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
+    addresses: Addresses[],
     id?: string,
   ) {
     super();
     if (!props) {
       return;
     }
-    this.document = this.validate_document(props.document);
+    this.document = ValidateDocument(props.document);
     this.name = props.name;
     this.dt_birth = props.dt_birth;
     this.id = id ? id : crypto.randomUUID();
-    const addressesData = props.addresses.map((address) => {
-      return new Addresses(address, this.id);
-    });
-    this.addresses = addressesData;
+    this.addresses = addresses;
   }
-  static create(
-    props: Omit<
-      People,
-      'id' | 'validate_document' | 'created_at' | 'updated_at'
-    >,
+  static async Create(
+    props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
+    addresses: Omit<
+      Addresses,
+      'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
+    >[],
     id?: string,
   ) {
-    return new People(props, id);
-  }
-  validate_document(document: string): string {
-    if (cpf.isValid(document) || cnpj.isValid(document)) {
-      return document;
-    } else {
-      throw new HttpException('Invalid document', 404);
+    const addressesData = [];
+    const _id = id ? id : crypto.randomUUID();
+    for (let i = 0; i < addresses.length; i++) {
+      addressesData.push(await Addresses.Create(addresses[i], _id));
     }
+    return new People(props, addressesData, _id);
   }
 }

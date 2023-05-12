@@ -17,19 +17,21 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./jets.config.json",
     "typeorm": "npm run build && npx typeorm -d dist/@core/db/conn/data-source.js",
     "migration:generate": "npm run typeorm -- migration:generate",
     "migration:run": "npm run typeorm -- migration:run",
     "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
-    "@nestjs/common": "^9.0.0",
-    "@nestjs/core": "^9.0.0",
-    "@nestjs/mapped-types": "*",
+    "@nestjs/common": "^9.4.0",
+    "@nestjs/config": "^2.3.1",
+    "@nestjs/core": "^9.4.0",
+    "@nestjs/mapped-types": "^1.2.2",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.3.0",
     "@nestjs/typeorm": "^9.0.1",
+    "cep-promise": "^4.4.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cpf-cnpj-validator": "^1.0.3",
@@ -76,6 +78,10 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper":{
+      "^@domain/(.*)$": ["<rootDir>/src/@core/domain/$1"],
+      "^@use-cases/(.*)$": ["<rootDir>/src/@core/use-cases/$1"]
+    }
   }
 }

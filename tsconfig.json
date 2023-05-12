@@ -10,7 +10,8 @@
     "sourceMap": true,
     "outDir": "./dist",
     "paths": {
-      "@/*": ["./src/*"]
+      "@domain/*": ["./src/@core/domain/*"],
+      "@use-cases/*": ["./src/@core/use-cases/*"]
     },
     "baseUrl": "./",
     "incremental": true,

@@ -1,6 +1,6 @@
+import { states } from '@domain/utils/convertions/convert-states';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray } from 'class-validator';
-import { states } from 'src/@core/domain/addresses/addresses';
 class AddressesInput {
   @ApiProperty()
   street: string;
