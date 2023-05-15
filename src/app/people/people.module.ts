@@ -51,7 +51,7 @@ import GetPeople from 'src/@core/use-cases/people/get-people';
       useFactory: (repoPeople: IPeopleRepository) => {
         return new CreatePerson(repoPeople);
       },
-      inject: [PeopleTypeOrmRepository, AddressesTypeOrmRepository],
+      inject: [PeopleTypeOrmRepository],
     },
   ],
 })
