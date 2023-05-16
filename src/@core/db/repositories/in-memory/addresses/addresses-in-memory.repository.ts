@@ -11,7 +11,7 @@ export default class AddressesInMemoryRepository
     });
     return Promise.resolve(this.items);
   }
-  async getAddressesByIdPerson(personId: string): Promise<Addresses[]> {
+  async getAddressesByIdPerson(personId: number): Promise<Addresses[]> {
     return Promise.resolve(
       this.items.filter((address) => address.id_person === personId),
     );

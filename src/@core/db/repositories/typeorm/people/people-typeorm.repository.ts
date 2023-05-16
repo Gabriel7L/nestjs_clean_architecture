@@ -8,7 +8,7 @@ export class PeopleTypeOrmRepository implements IPeopleRepository {
     const data = this.peopleRepo.create(person);
     return await this.peopleRepo.save(data);
   }
-  async getPersonById(id: string): Promise<People> {
+  async getPersonById(id: number): Promise<People> {
     return await this.peopleRepo.findOne({
       where: {
         id: id,

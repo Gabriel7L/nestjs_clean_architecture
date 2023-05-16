@@ -6,7 +6,7 @@ export default class GetBudget {
   constructor(budgetRepo: IBudgetRepository) {
     this.budgetRepo = budgetRepo;
   }
-  async getBudgetById(id: string): Promise<Budget> {
+  async getBudgetById(id: number): Promise<Budget> {
     return await this.budgetRepo.getById(id);
   }
 }

@@ -7,7 +7,7 @@ export default class PeopleInMemoryRepository implements IPeopleRepository {
     this.items.push(person);
     return Promise.resolve(person);
   }
-  async getPersonById(id: string): Promise<People> {
+  async getPersonById(id: number): Promise<People> {
     return Promise.resolve(this.items.find((person) => person.id === id));
   }
   async getPeople(): Promise<People[]> {

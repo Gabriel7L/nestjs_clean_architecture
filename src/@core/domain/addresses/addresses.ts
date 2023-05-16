@@ -15,15 +15,15 @@ export default class Addresses extends Basic {
   state: states;
   district: string;
   city: string;
-  id_person: string;
+  id_person: number;
   person: People;
   constructor(
     props: Omit<
       Addresses,
       'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
     >,
-    id_person: string,
-    id?: string,
+    id_person: number,
+    id?: number,
   ) {
     super();
     if (!props) {
@@ -37,15 +37,15 @@ export default class Addresses extends Basic {
     this.city = props.city;
     this.district = props.district;
     this.state = ConvertStringToEnum(props.state);
-    this.id = id ? id : crypto.randomUUID();
+    this.id = id ? id : undefined;
   }
   static async Create(
     props: Omit<
       Addresses,
       'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
     >,
-    id_person: string,
-    id?: string,
+    id_person?: number,
+    id?: number,
   ) {
     if (await ValidateZipCode(props.zip_code)) {
       return new Addresses(props, id_person, id);

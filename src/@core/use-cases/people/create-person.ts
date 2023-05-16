@@ -11,8 +11,7 @@ export default class CreatePerson {
       'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
     >[],
   ) {
-    const personId = crypto.randomUUID();
-    const data = await People.Create(props, addresses, personId);
+    const data = await People.Create(props, addresses);
     const person = await this.peopleRepo.savePerson(data);
     return person;
   }

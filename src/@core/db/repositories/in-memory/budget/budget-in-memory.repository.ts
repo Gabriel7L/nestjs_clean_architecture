@@ -6,21 +6,21 @@ export default class BudgetInMemoryRepository implements IBudgetRepository {
   items: Budget[] = [];
   async saveBudget(
     value: number,
-    id_client: string,
+    id_client: number,
     description: string,
   ): Promise<Budget> {
     const budget = {
       value,
       description,
       id_client,
-      id: crypto.randomUUID(),
+      id: 1,
       created_at: new Date(),
       updated_at: new Date(),
     };
     this.items.push(budget);
     return Promise.resolve(budget);
   }
-  async getById(id: string): Promise<Budget> {
+  async getById(id: number): Promise<Budget> {
     return Promise.resolve(this.items.find((item) => item.id === id));
   }
 }

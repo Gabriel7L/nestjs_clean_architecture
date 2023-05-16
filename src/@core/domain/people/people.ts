@@ -11,7 +11,7 @@ export default class People extends Basic {
   private constructor(
     props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
     addresses: Addresses[],
-    id?: string,
+    id?: number,
   ) {
     super();
     if (!props) {
@@ -20,7 +20,7 @@ export default class People extends Basic {
     this.document = ValidateDocument(props.document);
     this.name = props.name;
     this.dt_birth = props.dt_birth;
-    this.id = id ? id : crypto.randomUUID();
+    this.id = id ? id : undefined;
     this.addresses = addresses;
   }
   static async Create(
@@ -29,13 +29,11 @@ export default class People extends Basic {
       Addresses,
       'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
     >[],
-    id?: string,
   ) {
     const addressesData = [];
-    const _id = id ? id : crypto.randomUUID();
     for (let i = 0; i < addresses.length; i++) {
-      addressesData.push(await Addresses.Create(addresses[i], _id));
+      addressesData.push(await Addresses.Create(addresses[i]));
     }
-    return new People(props, addressesData, _id);
+    return new People(props, addressesData);
   }
 }

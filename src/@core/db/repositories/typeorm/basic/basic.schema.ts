@@ -2,8 +2,9 @@ import { EntitySchemaColumnOptions } from 'typeorm';
 
 export const BasicCollumnsSchema = {
   id: {
-    type: 'uuid',
+    type: 'int',
     primary: true,
+    generated: true,
   } as EntitySchemaColumnOptions,
 
   created_at: {

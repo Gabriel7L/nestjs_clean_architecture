@@ -23,7 +23,7 @@ export class PeopleService {
     return await this.getPeople.getPeople();
   }
 
-  findOne(id: string) {
+  findOne(id: number) {
     return this.getPerson.getPersonById(id);
   }
 
