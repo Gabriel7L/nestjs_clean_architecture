@@ -19,8 +19,8 @@ export class PeopleService {
     );
   }
 
-  async findAll() {
-    return await this.getPeople.getPeople();
+  async findAll(page: number, recordsPerPage: number) {
+    return await this.getPeople.getPeople(page, recordsPerPage);
   }
 
   findOne(id: number) {

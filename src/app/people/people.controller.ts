@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
@@ -21,8 +22,8 @@ export class PeopleController {
   }
 
   @Get()
-  findAll() {
-    return this.peopleService.findAll();
+  findAll(@Query('page') page: number, @Query('limit') limit: number) {
+    return this.peopleService.findAll(page, limit);
   }
 
   @Get(':id')

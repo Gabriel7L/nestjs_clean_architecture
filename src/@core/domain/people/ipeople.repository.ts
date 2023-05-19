@@ -1,7 +1,6 @@
+import { IRepository } from '@domain/basic/irepository';
 import People from 'src/@core/domain/people/people';
 
-export interface IPeopleRepository {
-  savePerson(person: People): Promise<People>;
-  getPersonById(id: number): Promise<People>;
-  getPeople(): Promise<People[]>;
+export interface IPeopleRepository extends IRepository<People> {
+  getByDocument(document: string): Promise<People>;
 }

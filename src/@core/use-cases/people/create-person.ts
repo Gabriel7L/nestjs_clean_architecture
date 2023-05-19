@@ -1,5 +1,4 @@
 import { IPeopleRepository } from '@domain/people/ipeople.repository';
-import crypto from 'crypto';
 import People from '@domain/people/people';
 import Addresses from '@domain/addresses/addresses';
 export default class CreatePerson {
@@ -12,7 +11,7 @@ export default class CreatePerson {
     >[],
   ) {
     const data = await People.Create(props, addresses);
-    const person = await this.peopleRepo.savePerson(data);
+    const person = await this.peopleRepo.create(data);
     return person;
   }
 }

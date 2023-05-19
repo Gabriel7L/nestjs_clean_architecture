@@ -1,4 +1,3 @@
-import crypto from 'crypto';
 import Addresses from '../addresses/addresses';
 import { Basic } from '../basic/basic';
 import ValidateDocument from '../utils/validations/document-validations';
