@@ -13,7 +13,7 @@
       "@domain/*": ["./src/@core/domain/*"],
       "@use-cases/*": ["./src/@core/use-cases/*"]
     },
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

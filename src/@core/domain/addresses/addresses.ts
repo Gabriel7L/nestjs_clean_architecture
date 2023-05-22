@@ -1,4 +1,3 @@
-import * as crypto from 'crypto';
 import { Basic } from '../basic/basic';
 import People from '../people/people';
 import {
