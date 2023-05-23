@@ -5,9 +5,6 @@ export default class PeopleInMemoryRepository implements IPeopleRepository {
   getByDocument(document: string): Promise<People> {
     throw new Error('Method not implemented.');
   }
-  create(item: People): Promise<People> {
-    throw new Error('Method not implemented.');
-  }
   update(id: number, item: People): Promise<People> {
     throw new Error('Method not implemented.');
   }
@@ -21,7 +18,7 @@ export default class PeopleInMemoryRepository implements IPeopleRepository {
     throw new Error('Method not implemented.');
   }
   items: People[] = [];
-  async savePerson(person: People): Promise<People> {
+  async create(person: People): Promise<People> {
     this.items.push(person);
     return Promise.resolve(person);
   }

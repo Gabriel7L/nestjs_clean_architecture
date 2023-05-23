@@ -1,4 +1,4 @@
-import Budget from 'src/@core/domain/budget/budget';
+import Budget from '@domain/budget/budget';
 import { EntitySchema } from 'typeorm';
 import { BasicCollumnsSchema } from '../basic/basic.schema';
 
