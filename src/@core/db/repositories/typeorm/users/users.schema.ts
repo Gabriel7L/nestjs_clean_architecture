@@ -11,6 +11,7 @@ export const UsersSchema = new EntitySchema<Users>({
     email: {
       type: 'varchar',
       length: 255,
+      unique: true,
     },
     password: {
       type: 'varchar',
