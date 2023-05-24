@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 
 export class UsersTypeOrmRepository implements IUsersRepository {
   constructor(private userRepo: Repository<Users>) {}
+
   async create(item: Users): Promise<Users> {
     const data = this.userRepo.create(item);
     return await this.userRepo.save(data);
@@ -32,5 +33,10 @@ export class UsersTypeOrmRepository implements IUsersRepository {
     const count = await this.userRepo.count();
     const total = Math.ceil(count / recordsPerPage);
     return { data, total };
+  }
+  async getByEmail(email: string): Promise<Users> {
+    const user = await this.userRepo.findOneBy({ email });
+    if (user) return user;
+    throw new HttpException('User not found', 404);
   }
 }

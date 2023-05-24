@@ -16,8 +16,14 @@ export class UsersRules {
   @IsNotEmpty()
   email: string;
   @IsNotEmpty()
-  @MaxLength(255)
-  @IsStrongPassword({ minLength: 6 })
+  @MaxLength(200)
+  @IsStrongPassword({
+    minLength: 6,
+    minLowercase: 0,
+    minSymbols: 0,
+    minUppercase: 0,
+    minNumbers: 0,
+  })
   password: string;
   @IsNumber()
   @IsNotEmpty()

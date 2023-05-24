@@ -3,6 +3,7 @@ import People from '@domain/people/people';
 import UsersValidatorFactory from './users.validator';
 import { HttpException } from '@nestjs/common';
 import Companies from '@domain/companies/companies';
+import * as bcrypt from 'bcrypt';
 
 export default class Users extends Basic {
   email: string;
@@ -24,6 +25,7 @@ export default class Users extends Basic {
     }
     Users.Validate(props);
     Object.assign(this, props);
+    this.password = bcrypt.hashSync(this.password, 8);
     this.id = id;
   }
 

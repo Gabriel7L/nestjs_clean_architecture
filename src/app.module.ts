@@ -5,9 +5,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from './@core/db/conn/data-source';
 import { CompaniesModule } from './app/companies/companies.module';
 import { UsersModule } from './app/users/users.module';
+import { AuthModule } from './app/auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [PeopleModule, TypeOrmModule.forRoot(dataSourceOptions), CompaniesModule, UsersModule],
+  imports: [
+    PeopleModule,
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot(dataSourceOptions),
+    CompaniesModule,
+    UsersModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [],
 })
