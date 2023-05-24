@@ -5,7 +5,7 @@ export default class PeopleInMemoryRepository implements IPeopleRepository {
   getByDocument(document: string): Promise<People> {
     throw new Error('Method not implemented.');
   }
-  update(id: number, item: People): Promise<People> {
+  update(item: People): Promise<People> {
     throw new Error('Method not implemented.');
   }
   getById(id: number): Promise<People> {

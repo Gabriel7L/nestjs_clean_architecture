@@ -1,3 +1,4 @@
+import { HttpException } from '@nestjs/common';
 import { IPeopleRepository } from 'src/@core/domain/people/ipeople.repository';
 import People from 'src/@core/domain/people/people';
 import { Repository } from 'typeorm';
@@ -10,11 +11,13 @@ export class PeopleTypeOrmRepository implements IPeopleRepository {
     return await this.peopleRepo.save(data);
   }
   async getById(id: number): Promise<People> {
-    return await this.peopleRepo.findOne({
+    const person = await this.peopleRepo.findOne({
       where: {
         id: id,
       },
     });
+    if (person) return person;
+    throw new HttpException('Person not found', 404);
   }
   async getAll(
     page: number,
@@ -35,8 +38,8 @@ export class PeopleTypeOrmRepository implements IPeopleRepository {
       },
     });
   }
-  async update(id: number, item: People): Promise<People> {
-    const person = await this.peopleRepo.preload({ ...item, id: id });
+  async update(item: People): Promise<People> {
+    const person = await this.peopleRepo.preload(item);
     return await this.peopleRepo.save(person);
   }
 }

@@ -2,30 +2,58 @@ import { states } from '@domain/utils/convertions/convert-states';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsArray } from 'class-validator';
 class AddressesInput {
-  @ApiProperty()
+  @ApiProperty({
+    example: 'Rua das Flores',
+  })
   street: string;
-  @ApiProperty()
+  @ApiProperty({
+    example: 'Sala 1',
+  })
   complement: string;
-  @ApiProperty()
+  @ApiProperty({
+    example: '123',
+  })
   number: string;
-  @ApiProperty()
+  @ApiProperty({
+    example: '12345-678',
+  })
   zip_code: string;
-  @ApiProperty()
+  @ApiProperty({
+    example: 'Centro',
+  })
   district: string;
-  @ApiProperty()
+  @ApiProperty({
+    example: 'RJ',
+  })
   state: states;
-  @ApiProperty()
+  @ApiProperty({
+    example: 'Rio de Janeiro',
+  })
   city: string;
 }
-
+class EmailsInput {
+  @ApiProperty({
+    example: 'pessoa@dreamsystem.com.br',
+  })
+  email: string;
+}
 export class CreatePersonDto {
-  @ApiProperty()
+  @ApiProperty({
+    example: 'João da Silva',
+  })
   name: string;
-  @ApiProperty()
+  @ApiProperty({
+    example: '157.557.450-05',
+  })
   document: string;
-  @ApiProperty()
+  @ApiProperty({
+    example: '1985-05-05',
+  })
   dt_birth: Date;
   @ApiProperty({ type: [AddressesInput] })
   @IsArray()
   addresses: AddressesInput[];
+  @ApiProperty({ type: [EmailsInput] })
+  @IsArray()
+  emails: EmailsInput[];
 }

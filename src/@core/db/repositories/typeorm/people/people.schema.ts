@@ -28,5 +28,12 @@ export const PeopleSchema = new EntitySchema<People>({
       eager: true,
       cascade: ['insert', 'update'],
     },
+    emails: {
+      target: 'emails',
+      type: 'one-to-many',
+      inverseSide: 'person',
+      eager: true,
+      cascade: ['insert', 'update'],
+    },
   },
 });

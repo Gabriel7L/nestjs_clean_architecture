@@ -17,6 +17,7 @@ describe('Test of validation methods', () => {
       expect(() => validation.Required().String().MaxLength(5)).toThrow(
         new ValidationError(
           'The field must be less or equal than 5 characters',
+          404,
         ),
       );
     });

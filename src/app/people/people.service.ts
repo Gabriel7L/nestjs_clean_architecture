@@ -16,6 +16,7 @@ export class PeopleService {
     return this.createPerson.createPerson(
       createPersonDto,
       createPersonDto.addresses,
+      createPersonDto.emails,
     );
   }
 

@@ -16,14 +16,20 @@ export class PeopleRules {
   name: string;
 
   constructor(
-    data: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
+    data: Omit<
+      People,
+      'id' | 'created_at' | 'updated_at' | 'addresses' | 'emails'
+    >,
   ) {
     Object.assign(this, data);
   }
 }
 export class PeopleValidator extends ClassValidatorFields<PeopleRules> {
   validate(
-    data: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
+    data: Omit<
+      People,
+      'id' | 'created_at' | 'updated_at' | 'addresses' | 'emails'
+    >,
   ): boolean {
     return super.validate(new PeopleRules(data));
   }

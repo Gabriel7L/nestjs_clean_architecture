@@ -23,6 +23,7 @@ test('Should be able to create a person', async function () {
       dt_birth: new Date(),
     },
     [address, address],
+    [],
   );
   console.log(person);
   expect(person.name).toBe('Gabriel');

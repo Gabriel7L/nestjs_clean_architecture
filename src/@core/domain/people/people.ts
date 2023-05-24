@@ -1,42 +1,57 @@
-import { HttpException } from '@nestjs/common';
+import Emails from '@domain/emails/emails';
 import Addresses from '../addresses/addresses';
 import { Basic } from '../basic/basic';
 import PeopleValidatorFactory from './people.validator';
+import { HttpException } from '@nestjs/common';
 
 export default class People extends Basic {
   document: string;
   name: string;
   dt_birth: Date;
   addresses: Addresses[];
+  emails: Emails[];
   private constructor(
-    props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
+    props: Omit<
+      People,
+      'id' | 'created_at' | 'updated_at' | 'addresses' | 'emails'
+    >,
     addresses: Addresses[],
+    emails: Emails[],
     id?: number,
   ) {
     super();
     if (!props) {
       return;
     }
-    People.validate(props);
-    this.document = props.document;
-    this.name = props.name;
-    this.dt_birth = props.dt_birth;
-    this.id = id;
+    People.Validate(props);
+    Object.assign(this, props);
     this.addresses = addresses;
+    this.emails = emails;
+    this.id = id;
   }
-  static async Create(
-    props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
+  static Create(
+    props: Omit<
+      People,
+      'id' | 'created_at' | 'updated_at' | 'addresses' | 'emails'
+    >,
     addresses: Omit<
       Addresses,
       'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
     >[],
+    emails: Omit<
+      Emails,
+      'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
+    >[],
   ) {
-    People.validate(props);
     const addressesData = [];
+    const emailsData = [];
     for (let i = 0; i < addresses.length; i++) {
-      addressesData.push(await Addresses.Create(addresses[i]));
+      addressesData.push(Addresses.Create(addresses[i]));
     }
-    return new People(props, addressesData);
+    for (let i = 0; i < emails.length; i++) {
+      emailsData.push(Emails.Create(emails[i]));
+    }
+    return new People(props, addressesData, emailsData);
   }
   // static validate(
   //   props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
@@ -50,8 +65,11 @@ export default class People extends Basic {
   //     .Required()
   //     .ValidDocument(props.document);
   // }
-  static validate(
-    props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
+  static Validate(
+    props: Omit<
+      People,
+      'id' | 'created_at' | 'updated_at' | 'addresses' | 'emails'
+    >,
   ) {
     const validator = PeopleValidatorFactory.create();
     validator.validate(props);

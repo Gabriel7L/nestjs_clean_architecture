@@ -41,7 +41,7 @@ export default class Addresses extends Basic {
     this.state = ConvertStringToEnum(props.state);
     this.id = id;
   }
-  static async Create(
+  static Create(
     props: Omit<
       Addresses,
       'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
