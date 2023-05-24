@@ -1,7 +1,7 @@
-import ValidatorRules from '@domain/utils/validations/validator-rules';
+import { HttpException } from '@nestjs/common';
 import Addresses from '../addresses/addresses';
 import { Basic } from '../basic/basic';
-import ValidateDocument from '../utils/validations/document-validations';
+import PeopleValidatorFactory from './people.validator';
 
 export default class People extends Basic {
   document: string;
@@ -38,14 +38,25 @@ export default class People extends Basic {
     }
     return new People(props, addressesData);
   }
+  // static validate(
+  //   props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
+  // ) {
+  //   ValidatorRules.SetRuleFor(props.name, 'name')
+  //     .Required()
+  //     .String()
+  //     .MaxLength(255);
+  //   ValidatorRules.SetRuleFor(props.dt_birth, 'dt_birth').Required();
+  //   ValidatorRules.SetRuleFor(props.document, 'document')
+  //     .Required()
+  //     .ValidDocument(props.document);
+  // }
   static validate(
     props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
   ) {
-    ValidatorRules.SetRuleFor(props.name, 'name')
-      .Required()
-      .String()
-      .MaxLength(255);
-    ValidatorRules.SetRuleFor(props.dt_birth, 'dt_birth').Required();
-    ValidateDocument(props.document);
+    const validator = PeopleValidatorFactory.create();
+    validator.validate(props);
+    if (validator.errors) {
+      throw new HttpException({ errors: validator.errors }, 400);
+    }
   }
 }

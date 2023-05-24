@@ -5,7 +5,8 @@ import {
   ConvertStringToEnum,
   states,
 } from '../utils/convertions/convert-states';
-import { ValidateZipCode } from '../utils/validations/zipcode-validations';
+import AddressesValidatorFactory from './addresses.validator';
+import { HttpException } from '@nestjs/common';
 
 export default class Addresses extends Basic {
   street: string;
@@ -48,10 +49,7 @@ export default class Addresses extends Basic {
     id_person?: number,
     id?: number,
   ) {
-    Addresses.Validate(props);
-    if (await ValidateZipCode(props.zip_code)) {
-      return new Addresses(props, id_person, id);
-    }
+    return new Addresses(props, id_person, id);
   }
   static Validate(
     props: Omit<
@@ -59,18 +57,10 @@ export default class Addresses extends Basic {
       'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
     >,
   ) {
-    ValidatorRules.SetRuleFor(props.street, 'street')
-      .Required()
-      .String()
-      .MaxLength(255);
-    ValidatorRules.SetRuleFor(props.state, 'state')
-      .Required()
-      .String()
-      .MaxLength(255);
-    ValidatorRules.SetRuleFor(props.district, 'district')
-      .String()
-      .MaxLength(255);
-    ValidatorRules.SetRuleFor(props.city, 'city').String().MaxLength(120);
-    ValidatorRules.SetRuleFor(props.number, 'number').String().MaxLength(80);
+    const validator = AddressesValidatorFactory.create();
+    validator.validate(props);
+    if (validator.errors) {
+      throw new HttpException({ errors: validator.errors }, 400);
+    }
   }
 }

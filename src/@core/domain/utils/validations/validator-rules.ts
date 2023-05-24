@@ -1,6 +1,7 @@
-import ValidationError from '../errors/validation-error';
+import { FieldsErrors } from './validator-fields-interface';
 
 export default class ValidatorRules {
+  private errors: FieldsErrors = null;
   constructor(private value: any, private property: string) {}
 
   static SetRuleFor(value: any, property: string) {
@@ -9,42 +10,47 @@ export default class ValidatorRules {
 
   Required() {
     if (this.value === null || this.value === undefined || this.value === '') {
-      throw new ValidationError(`The ${this.property} is required`, 400);
+      this.errors[this.property] = ['The value is required'];
     }
     return this;
   }
 
   String() {
     if (!IsEmpty(this.value) && typeof this.value !== 'string') {
-      throw new ValidationError(`The ${this.property} must be a string`, 400);
+      this.errors[this.property] = ['The value must be a string'];
     }
     return this;
   }
   MaxLength(max: number) {
     if (!IsEmpty(this.value) && this.value.length > max) {
-      throw new ValidationError(
-        `The ${this.property} must be less or equal than ${max} characters`,
-        400,
-      );
+      this.errors[this.property] = [
+        'The value must be less than ' + max + ' characters',
+      ];
     }
     return this;
   }
   MinLength(min: number) {
     if (!IsEmpty(this.value) && this.value.length < min) {
-      throw new ValidationError(
-        `The ${this.property} must be greater or equal than ${min} characters`,
-        400,
-      );
+      this.errors[this.property] = [
+        'The value must be more than ' + min + ' characters',
+      ];
     }
     return this;
   }
   Boolean() {
-    if (typeof this.value !== 'boolean') {
-      throw new ValidationError(`The ${this.property} must be a boolean`, 400);
+    if (!IsEmpty(this.value) && typeof this.value !== 'boolean') {
+      this.errors[this.property] = ['The value must be a boolean'];
     }
     return this;
   }
+  // ValidDocument(document: string) {
+  //   if (!IsEmpty(this.value) && ValidateDocument(document)) {
+  //     this.errors[this.property] = ['The value must be a valid document'];
+  //   }
+  //   return this;
+  // }
 }
+
 export function IsEmpty(value: string) {
   return value === null || value === undefined;
 }

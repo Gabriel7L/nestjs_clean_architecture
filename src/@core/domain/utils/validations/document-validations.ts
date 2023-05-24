@@ -1,10 +1,27 @@
-import { HttpException } from '@nestjs/common';
+import { ValidationOptions, registerDecorator } from 'class-validator';
 import { cnpj, cpf } from 'cpf-cnpj-validator';
 
-export default function ValidateDocument(document: string): string {
-  if (cpf.isValid(document) || cnpj.isValid(document)) {
-    return document.replace(/\D/g, '');
-  } else {
-    throw new HttpException('Invalid document', 404);
-  }
+export function ValidateDocument(
+  property: string,
+  validationOptions?: ValidationOptions,
+) {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  return function (object: Object, propertyName: string) {
+    registerDecorator({
+      name: 'ValidateDocument',
+      target: object.constructor,
+      propertyName: propertyName,
+      constraints: [property],
+      options: validationOptions,
+      validator: {
+        validate(value: any) {
+          if (cpf.isValid(value) || cnpj.isValid(value)) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
+    });
+  };
 }
