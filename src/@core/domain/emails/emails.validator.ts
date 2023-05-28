@@ -1,28 +1,18 @@
-import { IsEmail, IsOptional, IsString } from 'class-validator';
-import Emails from './emails';
+import { IsEmail, IsOptional } from 'class-validator';
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
+import { EmailsInput } from 'src/@core/application/emails/emails-input';
 
 export class EmailsRules {
   @IsOptional()
   @IsEmail()
   email: string;
-  constructor(
-    data: Omit<
-      Emails,
-      'id' | 'id_person' | 'created_at' | 'updated_at' | 'person'
-    >,
-  ) {
+  constructor(data: EmailsInput) {
     Object.assign(this, data);
   }
 }
 
 export class EmailsValidator extends ClassValidatorFields<EmailsRules> {
-  validate(
-    data: Omit<
-      Emails,
-      'id' | 'id_person' | 'created_at' | 'updated_at' | 'person'
-    >,
-  ): boolean {
+  validate(data: EmailsInput): boolean {
     return super.validate(new EmailsRules(data));
   }
 }

@@ -3,6 +3,9 @@ import Addresses from '../addresses/addresses';
 import { Basic } from '../basic/basic';
 import PeopleValidatorFactory from './people.validator';
 import { HttpException } from '@nestjs/common';
+import { PeopleInput } from 'src/@core/application/people/people-input';
+import { AddressesInput } from 'src/@core/application/addresses/addresses-input';
+import { EmailsInput } from 'src/@core/application/emails/emails-input';
 
 export default class People extends Basic {
   document: string;
@@ -10,67 +13,29 @@ export default class People extends Basic {
   dt_birth: Date;
   addresses: Addresses[];
   emails: Emails[];
-  private constructor(
-    props: Omit<
-      People,
-      'id' | 'created_at' | 'updated_at' | 'addresses' | 'emails'
-    >,
-    addresses: Addresses[],
-    emails: Emails[],
-    id?: number,
-  ) {
+  private constructor(props: PeopleInput, id?: number) {
     super();
     if (!props) {
       return;
     }
     People.Validate(props);
-    Object.assign(this, props);
-    this.addresses = addresses;
-    this.emails = emails;
+    this.document = props.document;
+    this.name = props.name;
+    this.dt_birth = props.dt_birth;
+    this.addresses = [];
+    this.emails = [];
     this.id = id;
   }
-  static Create(
-    props: Omit<
-      People,
-      'id' | 'created_at' | 'updated_at' | 'addresses' | 'emails'
-    >,
-    addresses: Omit<
-      Addresses,
-      'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
-    >[],
-    emails: Omit<
-      Emails,
-      'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
-    >[],
-  ) {
-    const addressesData = [];
-    const emailsData = [];
-    for (let i = 0; i < addresses.length; i++) {
-      addressesData.push(Addresses.Create(addresses[i]));
-    }
-    for (let i = 0; i < emails.length; i++) {
-      emailsData.push(Emails.Create(emails[i]));
-    }
-    return new People(props, addressesData, emailsData);
+  static Create(props: PeopleInput) {
+    return new People(props);
   }
-  // static validate(
-  //   props: Omit<People, 'id' | 'created_at' | 'updated_at' | 'addresses'>,
-  // ) {
-  //   ValidatorRules.SetRuleFor(props.name, 'name')
-  //     .Required()
-  //     .String()
-  //     .MaxLength(255);
-  //   ValidatorRules.SetRuleFor(props.dt_birth, 'dt_birth').Required();
-  //   ValidatorRules.SetRuleFor(props.document, 'document')
-  //     .Required()
-  //     .ValidDocument(props.document);
-  // }
-  static Validate(
-    props: Omit<
-      People,
-      'id' | 'created_at' | 'updated_at' | 'addresses' | 'emails'
-    >,
-  ) {
+  AddAddress(addressInput: AddressesInput, id_person?: number): void {
+    this.addresses.push(new Addresses(addressInput, id_person));
+  }
+  AddEmail(email: EmailsInput, id_person?: number): void {
+    this.emails.push(new Emails(email, id_person));
+  }
+  static Validate(props: PeopleInput) {
     const validator = PeopleValidatorFactory.create();
     validator.validate(props);
     if (validator.errors) {

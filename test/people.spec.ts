@@ -25,13 +25,11 @@ test('Should be able to create a person', async function () {
     [address, address],
     [],
   );
-  console.log(person);
   expect(person.name).toBe('Gabriel');
   expect(person.document).toBe('09790967667');
   expect(person.id).not.toBeNull();
   expect(person.addresses).not.toBeNull();
   person.addresses.forEach((address) => {
-    console.log(address);
     expect(address.id_person).toBe(person.id);
   });
 });

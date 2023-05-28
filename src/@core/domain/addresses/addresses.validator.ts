@@ -7,8 +7,8 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
-import Addresses from './addresses';
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
+import { AddressesInput } from 'src/@core/application/addresses/addresses-input';
 
 export class AddressesRules {
   @IsString()
@@ -36,22 +36,12 @@ export class AddressesRules {
   @MaxLength(100)
   @IsNotEmpty()
   city: string;
-  constructor(
-    data: Omit<
-      Addresses,
-      'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
-    >,
-  ) {
+  constructor(data: AddressesInput) {
     Object.assign(this, data);
   }
 }
 export class AddressesValidator extends ClassValidatorFields<AddressesRules> {
-  validate(
-    data: Omit<
-      Addresses,
-      'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
-    >,
-  ): boolean {
+  validate(data: AddressesInput): boolean {
     return super.validate(new AddressesRules(data));
   }
 }

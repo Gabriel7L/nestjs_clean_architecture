@@ -14,8 +14,8 @@ export function ValidateDocument(
       constraints: [property],
       options: validationOptions,
       validator: {
-        validate(value: any) {
-          if (cpf.isValid(value) || cnpj.isValid(value)) {
+        validate(value: string) {
+          if (!value && (cpf.isValid(value) || cnpj.isValid(value))) {
             return true;
           } else {
             return false;

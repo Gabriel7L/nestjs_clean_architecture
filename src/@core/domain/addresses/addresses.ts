@@ -1,4 +1,3 @@
-import ValidatorRules from '@domain/utils/validations/validator-rules';
 import { Basic } from '../basic/basic';
 import People from '../people/people';
 import {
@@ -7,6 +6,7 @@ import {
 } from '../utils/convertions/convert-states';
 import AddressesValidatorFactory from './addresses.validator';
 import { HttpException } from '@nestjs/common';
+import { AddressesInput } from 'src/@core/application/addresses/addresses-input';
 
 export default class Addresses extends Basic {
   street: string;
@@ -18,14 +18,7 @@ export default class Addresses extends Basic {
   city: string;
   id_person: number;
   person: People;
-  constructor(
-    props: Omit<
-      Addresses,
-      'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
-    >,
-    id_person: number,
-    id?: number,
-  ) {
+  constructor(props: AddressesInput, id_person?: number, id?: number) {
     super();
     if (!props) {
       return;
@@ -41,22 +34,10 @@ export default class Addresses extends Basic {
     this.state = ConvertStringToEnum(props.state);
     this.id = id;
   }
-  static Create(
-    props: Omit<
-      Addresses,
-      'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
-    >,
-    id_person?: number,
-    id?: number,
-  ) {
+  static Create(props: AddressesInput, id_person?: number, id?: number) {
     return new Addresses(props, id_person, id);
   }
-  static Validate(
-    props: Omit<
-      Addresses,
-      'id_person' | 'id' | 'created_at' | 'updated_at' | 'person'
-    >,
-  ) {
+  static Validate(props: AddressesInput) {
     const validator = AddressesValidatorFactory.create();
     validator.validate(props);
     if (validator.errors) {
