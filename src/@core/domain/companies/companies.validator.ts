@@ -1,7 +1,7 @@
 import { ValidateDocument } from '@domain/utils/validations/document-validations';
 import { MaxLength, IsString, IsNotEmpty, IsOptional } from 'class-validator';
-import Companies from './companies';
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
+import { CompaniesInput } from 'src/@core/application/companies/companies-input';
 
 export class CompaniesRules {
   @MaxLength(60)
@@ -18,12 +18,12 @@ export class CompaniesRules {
   @IsString()
   fantasy_name: string;
 
-  constructor(data: Omit<Companies, 'id' | 'created_at' | 'updated_at'>) {
+  constructor(data: CompaniesInput) {
     Object.assign(this, data);
   }
 }
 export class CompaniesValidator extends ClassValidatorFields<CompaniesRules> {
-  validate(data: Omit<Companies, 'id' | 'created_at' | 'updated_at'>) {
+  validate(data: CompaniesInput) {
     return super.validate(new CompaniesRules(data));
   }
 }

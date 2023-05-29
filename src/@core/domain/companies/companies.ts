@@ -16,11 +16,11 @@ export default class Companies extends Basic {
     Object.assign(this, props);
     this.id = id;
   }
-  static Create(props: Omit<Companies, 'id' | 'created_at' | 'updated_at'>) {
+  static Create(props: CompaniesInput) {
     return new Companies(props);
   }
 
-  static Validate(props: Omit<Companies, 'id' | 'created_at' | 'updated_at'>) {
+  static Validate(props: CompaniesInput) {
     const validator = CompaniesValidatorFactory.create();
     validator.validate(props);
     if (validator.errors) {
