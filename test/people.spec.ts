@@ -9,24 +9,22 @@ test('Should be able to create a person', async function () {
   const address = {
     street: 'Rua Camilo Cristelli',
     city: 'Sete Lagoas',
-    state: states.MG,
+    state: 'MG',
     complement: 'apto 902',
     number: '46',
     zip_code: '35700-070',
     district: 'Centro',
-    id_person: '123',
   };
   const person = await createPerson.createPerson(
     {
-      document: '09790967667',
+      document: '',
       name: 'Gabriel',
       dt_birth: new Date(),
     },
     [address, address],
-    [],
   );
   expect(person.name).toBe('Gabriel');
-  expect(person.document).toBe('09790967667');
+  expect(person.document).toBe('');
   expect(person.id).not.toBeNull();
   expect(person.addresses).not.toBeNull();
   person.addresses.forEach((address) => {

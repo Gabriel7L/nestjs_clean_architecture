@@ -1,12 +1,11 @@
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
-import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 import { ValidateDocument } from '@domain/utils/validations/document-validations';
 import { PeopleInput } from 'src/@core/application/people/people-input';
 
 export class PeopleRules {
   @MaxLength(60)
-  @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @ValidateDocument('document', { message: 'Document is invalid' })
   document: string;
 

@@ -21,7 +21,6 @@ export default class CreatePerson {
         person.AddEmail(email);
       });
     }
-    console.log(person);
     const data = await this.peopleRepo.create(person);
     return data;
   }

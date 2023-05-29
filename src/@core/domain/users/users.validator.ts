@@ -8,6 +8,7 @@ import {
 } from 'class-validator';
 import Users from './users';
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
+import { UsersInput } from 'src/@core/application/users/users-input';
 
 export class UsersRules {
   @MaxLength(255)
@@ -30,25 +31,15 @@ export class UsersRules {
   id_person: number;
   @IsNumber()
   @IsNotEmpty()
-  id_companie: number;
+  id_company: number;
 
-  constructor(
-    data: Omit<
-      Users,
-      'id' | 'created_at' | 'updated_at' | 'person' | 'companie'
-    >,
-  ) {
+  constructor(data: UsersInput) {
     Object.assign(this, data);
   }
 }
 
 export class UsersValidator extends ClassValidatorFields<UsersRules> {
-  validate(
-    data: Omit<
-      Users,
-      'id' | 'created_at' | 'updated_at' | 'person' | 'companie'
-    >,
-  ): boolean {
+  validate(data: UsersInput): boolean {
     return super.validate(new UsersRules(data));
   }
 }

@@ -15,7 +15,7 @@ export function ValidateDocument(
       options: validationOptions,
       validator: {
         validate(value: string) {
-          if (!value && (cpf.isValid(value) || cnpj.isValid(value))) {
+          if (!value || cpf.isValid(value) || cnpj.isValid(value)) {
             return true;
           } else {
             return false;

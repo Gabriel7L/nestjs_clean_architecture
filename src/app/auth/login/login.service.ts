@@ -16,6 +16,7 @@ export class LoginService {
       const payload = {
         sub: users.id,
         email: users.email,
+        company: users.id_company,
       };
 
       const rt = this.jwtService.sign(

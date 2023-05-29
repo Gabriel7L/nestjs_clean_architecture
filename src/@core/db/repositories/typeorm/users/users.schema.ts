@@ -17,7 +17,7 @@ export const UsersSchema = new EntitySchema<Users>({
       type: 'varchar',
       length: 255,
     },
-    id_companie: {
+    id_company: {
       type: 'int',
       nullable: false,
     },
@@ -34,11 +34,11 @@ export const UsersSchema = new EntitySchema<Users>({
         name: 'id_person',
       },
     },
-    companie: {
+    company: {
       target: 'companies',
       type: 'many-to-one',
       joinColumn: {
-        name: 'id_companie',
+        name: 'id_company',
       },
     },
   },

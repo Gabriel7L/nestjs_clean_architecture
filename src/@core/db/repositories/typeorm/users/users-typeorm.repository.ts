@@ -7,6 +7,9 @@ export class UsersTypeOrmRepository implements IUsersRepository {
   constructor(private userRepo: Repository<Users>) {}
 
   async create(item: Users): Promise<Users> {
+    if (await this.getByEmail(item.email)) {
+      throw new HttpException('User already exists', 400);
+    }
     const data = this.userRepo.create(item);
     return await this.userRepo.save(data);
   }
@@ -37,6 +40,6 @@ export class UsersTypeOrmRepository implements IUsersRepository {
   async getByEmail(email: string): Promise<Users> {
     const user = await this.userRepo.findOneBy({ email });
     if (user) return user;
-    throw new HttpException('User not found', 404);
+    return null;
   }
 }
