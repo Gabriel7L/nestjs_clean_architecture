@@ -1,19 +1,22 @@
 import Emails from '@domain/emails/emails';
 import Addresses from '../addresses/addresses';
 import { Basic } from '../basic/basic';
-import PeopleValidatorFactory from './people.validator';
 import { HttpException } from '@nestjs/common';
 import { PeopleInput } from 'src/@core/application/people/people-input';
 import { AddressesInput } from 'src/@core/application/addresses/addresses-input';
 import { EmailsInput } from 'src/@core/application/emails/emails-input';
+import Companies from '@domain/companies/companies';
+import PeopleValidatorFactory from './validators/people.validator';
 
 export default class People extends Basic {
   document: string;
   name: string;
   dt_birth: Date;
+  id_company: number;
+  company: Companies;
   addresses: Addresses[];
   emails: Emails[];
-  private constructor(props: PeopleInput, id?: number) {
+  private constructor(props: PeopleInput, id_company: number, id?: number) {
     super();
     if (!props) {
       return;
@@ -25,9 +28,10 @@ export default class People extends Basic {
     this.addresses = [];
     this.emails = [];
     this.id = id;
+    this.id_company = id_company;
   }
-  static Create(props: PeopleInput) {
-    return new People(props);
+  static Create(props: PeopleInput, id_company: number) {
+    return new People(props, id_company);
   }
   AddAddress(addressInput: AddressesInput, id_person?: number): void {
     this.addresses.push(new Addresses(addressInput, id_person));

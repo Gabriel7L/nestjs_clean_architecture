@@ -2,21 +2,6 @@ import { IPeopleRepository } from '@domain/people/ipeople.repository';
 import People from '@domain/people/people';
 
 export default class PeopleInMemoryRepository implements IPeopleRepository {
-  getByDocument(document: string): Promise<People> {
-    throw new Error('Method not implemented.');
-  }
-  update(item: People): Promise<People> {
-    throw new Error('Method not implemented.');
-  }
-  getById(id: number): Promise<People> {
-    throw new Error('Method not implemented.');
-  }
-  getAll(
-    page: number,
-    recordsPerPage: number,
-  ): Promise<{ total: number; data: People[] }> {
-    throw new Error('Method not implemented.');
-  }
   items: People[] = [];
   async create(person: People): Promise<People> {
     this.items.push(person);
@@ -27,5 +12,23 @@ export default class PeopleInMemoryRepository implements IPeopleRepository {
   }
   async getPeople(): Promise<People[]> {
     return Promise.resolve(this.items);
+  }
+  getByDocument(document: string): Promise<People> {
+    throw new Error('Method not implemented.' + document);
+  }
+  update(item: People): Promise<People> {
+    throw new Error('Method not implemented.' + item);
+  }
+  getById(id: number): Promise<People> {
+    throw new Error('Method not implemented.' + id);
+  }
+  getAll(
+    page: number,
+    recordsPerPage: number,
+    id_company: number,
+  ): Promise<{ total: number; data: People[] }> {
+    throw new Error(
+      'Method not implemented.' + page + recordsPerPage + id_company,
+    );
   }
 }

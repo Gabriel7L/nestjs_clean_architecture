@@ -5,5 +5,6 @@ export interface IRepository<T> {
   getAll(
     page: number,
     recordsPerPage: number,
+    id_company: number,
   ): Promise<{ total: number; data: T[] }>;
 }

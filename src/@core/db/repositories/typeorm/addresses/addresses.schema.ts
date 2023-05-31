@@ -17,8 +17,9 @@ export const AddressesSchema = new EntitySchema<Addresses>({
       length: 150,
     },
     id_person: {
-      type: 'uuid',
+      type: 'int',
       nullable: false,
+      select: false,
     },
     complement: {
       type: 'text',

@@ -21,22 +21,28 @@ export class PeopleTypeOrmRepository implements IPeopleRepository {
   }
   async getAll(
     page: number,
-    recordsPerPage: number,
+    recordsPerPage = 10,
+    id_company: number,
   ): Promise<{ total: number; data: People[] }> {
     const data = await this.peopleRepo.find({
       skip: page,
       take: recordsPerPage,
+      where: {
+        id_company: id_company,
+      },
     });
     const count = await this.peopleRepo.count();
     const total = Math.ceil(count / recordsPerPage);
     return { data, total };
   }
-  async getByDocument(document: string): Promise<People> {
-    return await this.peopleRepo.findOne({
+  async getByDocument(document: string, id_company: number): Promise<People> {
+    const person = await this.peopleRepo.findOne({
       where: {
         document: document,
+        id_company: id_company,
       },
     });
+    return person;
   }
   async update(item: People): Promise<People> {
     const person = await this.peopleRepo.preload(item);

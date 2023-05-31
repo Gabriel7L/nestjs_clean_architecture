@@ -6,11 +6,15 @@ import { StockInput } from 'src/@core/application/stocks/stock-input';
 export default class Stocks extends Basic {
   stockItems: StocksItems[];
   stock: string;
+  place: string;
   active: boolean;
-  constructor(props: StockInput) {
+  id_company: number;
+  constructor(props: StockInput, id_company: number, id?: number) {
     super();
     Object.assign(this, props);
     this.stockItems = [];
+    this.id = id;
+    this.id_company = id_company;
   }
 
   AddProductsStock(product: ProductsStockInput) {

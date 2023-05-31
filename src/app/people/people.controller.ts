@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
@@ -22,18 +23,33 @@ export class PeopleController {
   constructor(private readonly peopleService: PeopleService) {}
 
   @Post()
-  create(@Body() createPersonDto: CreatePersonDto) {
-    return this.peopleService.create(createPersonDto);
+  create(@Body() createPersonDto: CreatePersonDto, @Request() req) {
+    console.log(req.user);
+    return this.peopleService.create(
+      createPersonDto,
+      parseInt(req.user.company),
+    );
   }
 
   @Get()
-  findAll(@Query('page') page: number, @Query('limit') limit: number) {
-    return this.peopleService.findAll(page, limit);
+  findAll(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+    @Request() req,
+  ) {
+    return this.peopleService.findAll(page, limit, parseInt(req.user.company));
   }
 
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.peopleService.findOne(id);
+  }
+  @Get('/bydocument/:document')
+  findByDocument(@Param('document') document: string, @Request() req) {
+    return this.peopleService.findByDocument(
+      document,
+      parseInt(req.user.company),
+    );
   }
 
   @Patch(':id')

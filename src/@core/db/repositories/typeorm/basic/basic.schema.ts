@@ -10,9 +10,11 @@ export const BasicCollumnsSchema = {
   created_at: {
     type: 'timestamp',
     createDate: true,
+    select: false,
   } as EntitySchemaColumnOptions,
   updated_at: {
     type: 'timestamp',
     updateDate: true,
+    select: false,
   } as EntitySchemaColumnOptions,
 };

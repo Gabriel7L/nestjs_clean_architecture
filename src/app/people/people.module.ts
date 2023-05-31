@@ -11,6 +11,7 @@ import People from 'src/@core/domain/people/people';
 import Addresses from 'src/@core/domain/addresses/addresses';
 import { getDataSourceToken } from '@nestjs/typeorm';
 import GetPeople from 'src/@core/use-cases/people/get-people';
+import GetPersonByDocument from '@use-cases/people/get-person-by-document';
 
 @Module({
   controllers: [PeopleController],
@@ -43,6 +44,13 @@ import GetPeople from 'src/@core/use-cases/people/get-people';
       provide: GetPeople,
       useFactory: (repoPeople: IPeopleRepository) => {
         return new GetPeople(repoPeople);
+      },
+      inject: [PeopleTypeOrmRepository],
+    },
+    {
+      provide: GetPersonByDocument,
+      useFactory: (repoPeople: IPeopleRepository) => {
+        return new GetPersonByDocument(repoPeople);
       },
       inject: [PeopleTypeOrmRepository],
     },
