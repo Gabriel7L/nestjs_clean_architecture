@@ -47,6 +47,14 @@ export class CreatePersonDto {
   })
   document: string;
   @ApiProperty({
+    example: 'PF',
+  })
+  person_type: string;
+  @ApiProperty({
+    example: true,
+  })
+  is_supplier: boolean;
+  @ApiProperty({
     example: '1985-05-05',
   })
   dt_birth: Date;

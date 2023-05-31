@@ -1,6 +1,6 @@
-import Addresses from 'src/@core/domain/addresses/addresses';
 import { EntitySchema } from 'typeorm';
 import { BasicCollumnsSchema } from '../basic/basic.schema';
+import Addresses from '@domain/addresses/addresses';
 
 export const AddressesSchema = new EntitySchema<Addresses>({
   name: 'addresses',

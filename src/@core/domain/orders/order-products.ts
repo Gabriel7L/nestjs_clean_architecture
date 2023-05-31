@@ -1,9 +1,14 @@
-export default class OrderProducts {
+import { Basic } from '@domain/basic/basic';
+import Orders from './orders';
+
+export default class OrderProducts extends Basic {
   id_product: number;
   value: number;
   quantity: number;
   discount: number;
+  id_order: number;
   product: string;
+  order: Orders;
   constructor(
     id_product: number,
     product: string,
@@ -11,6 +16,7 @@ export default class OrderProducts {
     quantity: number,
     discount?: number,
   ) {
+    super();
     this.id_product = id_product;
     this.value = value;
     this.quantity = quantity;

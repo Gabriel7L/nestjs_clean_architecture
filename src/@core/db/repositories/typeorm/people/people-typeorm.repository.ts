@@ -1,5 +1,5 @@
 import { HttpException } from '@nestjs/common';
-import { IPeopleRepository } from 'src/@core/domain/people/ipeople.repository';
+import { IPeopleRepository } from 'src/@core/domain/people/repositories/ipeople.repository';
 import People from 'src/@core/domain/people/people';
 import { Repository } from 'typeorm';
 

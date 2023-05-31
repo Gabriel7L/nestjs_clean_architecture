@@ -12,6 +12,8 @@ export default class People extends Basic {
   document: string;
   name: string;
   dt_birth: Date;
+  person_type: string;
+  is_supplier: boolean;
   id_company: number;
   company: Companies;
   addresses: Addresses[];

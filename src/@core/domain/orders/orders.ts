@@ -3,6 +3,7 @@ import Products from '@domain/products/products';
 import OrderProducts from './order-products';
 import OrderServices from './order-services';
 import Services from '@domain/services/services';
+import People from '@domain/people/people';
 
 export default class Orders extends Basic {
   description: string;
@@ -12,6 +13,7 @@ export default class Orders extends Basic {
   discount: number;
   status: string;
   id_client: number;
+  client: People;
   constructor(id_client: number) {
     super();
     this.total_value = 0;

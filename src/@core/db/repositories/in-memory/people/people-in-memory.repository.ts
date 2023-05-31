@@ -1,4 +1,4 @@
-import { IPeopleRepository } from '@domain/people/ipeople.repository';
+import { IPeopleRepository } from '@domain/people/repositories/ipeople.repository';
 import People from '@domain/people/people';
 
 export default class PeopleInMemoryRepository implements IPeopleRepository {

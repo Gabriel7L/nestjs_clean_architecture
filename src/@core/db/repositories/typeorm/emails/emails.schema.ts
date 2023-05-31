@@ -1,6 +1,6 @@
-import Emails from '../../../../domain/emails/emails';
 import { EntitySchema } from 'typeorm';
 import { BasicCollumnsSchema } from '../basic/basic.schema';
+import Emails from '@domain/emails/emails';
 
 export const EmailsSchema = new EntitySchema<Emails>({
   name: 'emails',

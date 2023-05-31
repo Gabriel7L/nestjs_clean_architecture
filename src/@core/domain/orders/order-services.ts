@@ -1,9 +1,14 @@
-export default class OrderServices {
+import { Basic } from '@domain/basic/basic';
+import Orders from './orders';
+
+export default class OrderServices extends Basic {
   id_service: number;
   service_name: string;
   price: number;
   quantity: number;
   discount: number;
+  id_order: number;
+  order: Orders;
   constructor(
     id_service: number,
     service_name: string,
@@ -11,6 +16,7 @@ export default class OrderServices {
     quantity: number,
     discount?: number,
   ) {
+    super();
     this.id_service = id_service;
     this.service_name = service_name;
     this.price = price;

@@ -2,6 +2,8 @@ import { Basic } from '@domain/basic/basic';
 import { ProductsInput } from 'src/@core/application/products/products-input';
 
 export default class Products extends Basic {
+  id_category: number;
+  id_supplier: number;
   product: string;
   price_selling: number;
   price_purchase: number;
