@@ -27,6 +27,8 @@ export default class People extends Basic {
     this.document = props.document;
     this.name = props.name;
     this.dt_birth = props.dt_birth;
+    this.person_type = props.person_type;
+    this.is_supplier = props.is_supplier;
     this.addresses = [];
     this.emails = [];
     this.id = id;

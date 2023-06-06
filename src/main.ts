@@ -10,6 +10,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
 
+  app.enableCors();
   const customOptions: ExpressSwaggerCustomOptions = {
     customSiteTitle: 'Clean Architecture',
     customCss: `

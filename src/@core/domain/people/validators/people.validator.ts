@@ -1,5 +1,12 @@
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
-import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsDateString,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 import { ValidateDocument } from '@domain/utils/validations/document-validations';
 import { PeopleInput } from 'src/@core/application/people/people-input';
 
@@ -13,6 +20,18 @@ export class PeopleRules {
   @IsString()
   @IsNotEmpty()
   name: string;
+
+  @MaxLength(2)
+  @IsString()
+  @IsNotEmpty()
+  person_type: string;
+
+  @IsBoolean()
+  is_supplier: boolean;
+
+  @IsDateString()
+  @IsNotEmpty()
+  dt_birth: Date;
 
   constructor(data: PeopleInput) {
     Object.assign(this, data);

@@ -5,6 +5,7 @@ import { BasicCollumnsSchema } from '../../basic/basic.schema';
 export const OrderSchema = new EntitySchema<Orders>({
   name: 'orders',
   tableName: 'orders',
+  target: Orders,
   columns: {
     ...BasicCollumnsSchema,
     total_value: {
@@ -14,10 +15,6 @@ export const OrderSchema = new EntitySchema<Orders>({
     },
     description: {
       type: 'text',
-    },
-    id_client: {
-      type: 'integer',
-      nullable: false,
     },
     discount: {
       type: 'decimal',
@@ -36,19 +33,13 @@ export const OrderSchema = new EntitySchema<Orders>({
       type: 'one-to-many',
       target: 'order_products',
       eager: true,
-      joinColumn: {
-        name: 'id_order',
-      },
     },
     orderServices: {
       type: 'one-to-many',
       target: 'order_services',
       eager: true,
-      joinColumn: {
-        name: 'id_order',
-      },
     },
-    client: {
+    id_client: {
       type: 'many-to-one',
       target: 'people',
       eager: true,

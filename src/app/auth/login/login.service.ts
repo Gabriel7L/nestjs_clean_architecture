@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import GetByEmailUser from '@use-cases/users/get-by-email-user';
@@ -26,7 +26,7 @@ export class LoginService {
 
       const jwt = this.jwtService.sign(payload, {
         secret: process.env.JWT_SECRET_ACCESS,
-        expiresIn: '30h',
+        expiresIn: '30d',
       });
 
       return { Token: 'Bearer ' + jwt, RefreshToken: rt };

@@ -11,6 +11,7 @@
     "outDir": "./dist",
     "paths": {
       "@domain/*": ["./src/@core/domain/*"],
+      "@application/*": ["./src/@core/application/*"],
       "@use-cases/*": ["./src/@core/use-cases/*"]
     },
     "baseUrl": "./",

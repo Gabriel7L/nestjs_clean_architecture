@@ -5,6 +5,7 @@ import { BasicCollumnsSchema } from '../../basic/basic.schema';
 export const OrderServicesSchema = new EntitySchema<OrderServices>({
   name: 'order_services',
   tableName: 'order_services',
+  target: OrderServices,
   columns: {
     ...BasicCollumnsSchema,
     price: {
@@ -19,27 +20,26 @@ export const OrderServicesSchema = new EntitySchema<OrderServices>({
       precision: 2,
       nullable: true,
     },
-    service_name: {
-      type: 'varchar',
-      length: 255,
-      nullable: false,
-    },
     id_service: {
-      type: 'int',
-      nullable: false,
-    },
-    id_order: {
       type: 'int',
       nullable: false,
     },
   },
   relations: {
-    order: {
+    id_order: {
       type: 'many-to-one',
       target: 'orders',
       onDelete: 'CASCADE',
       joinColumn: {
         name: 'id_order',
+      },
+    },
+    id_service: {
+      type: 'many-to-one',
+      target: 'services',
+      nullable: false,
+      joinColumn: {
+        name: 'id_service',
       },
     },
   },

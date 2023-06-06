@@ -23,6 +23,9 @@ export default class Products extends Basic {
   id_company: number;
   constructor(props: ProductsInput, id_company: number) {
     super();
+    if (!props) {
+      return;
+    }
     Object.assign(this, props);
     this.id_company = id_company;
   }

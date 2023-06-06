@@ -13,9 +13,11 @@ export default class Orders extends Basic {
   discount: number;
   status: string;
   id_client: number;
-  client: People;
   constructor(id_client: number) {
     super();
+    if (!id_client) {
+      return;
+    }
     this.total_value = 0;
     this.discount = 0;
     this.id_client = id_client;
@@ -28,7 +30,6 @@ export default class Orders extends Basic {
       this.orderProducts.push(
         new OrderProducts(
           product.id,
-          product.product,
           product.price_selling,
           quantity,
           discount,
@@ -42,13 +43,7 @@ export default class Orders extends Basic {
   addService(service: Services, quantity: number, discount = 0) {
     if (service.max_discount >= discount && discount >= 0) {
       this.orderServices.push(
-        new OrderServices(
-          service.id,
-          service.service,
-          service.price,
-          quantity,
-          discount,
-        ),
+        new OrderServices(service.id, service.price, quantity, discount),
       );
     } else {
       throw new Error('Discount invalid');

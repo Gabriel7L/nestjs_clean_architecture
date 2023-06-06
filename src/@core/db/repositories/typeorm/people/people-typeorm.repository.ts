@@ -20,19 +20,23 @@ export class PeopleTypeOrmRepository implements IPeopleRepository {
     throw new HttpException('Person not found', 404);
   }
   async getAll(
-    page: number,
+    page = 0,
     recordsPerPage = 10,
     id_company: number,
   ): Promise<{ total: number; data: People[] }> {
+    if (page < 0) page = 0;
     const data = await this.peopleRepo.find({
-      skip: page,
+      skip: page * recordsPerPage,
       take: recordsPerPage,
       where: {
         id_company: id_company,
       },
+      order: {
+        id: 'ASC',
+      },
     });
     const count = await this.peopleRepo.count();
-    const total = Math.ceil(count / recordsPerPage);
+    const total = count;
     return { data, total };
   }
   async getByDocument(document: string, id_company: number): Promise<People> {

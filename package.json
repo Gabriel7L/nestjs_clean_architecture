@@ -93,6 +93,9 @@
       ],
       "^@use-cases/(.*)$": [
         "<rootDir>/src/@core/use-cases/$1"
+      ],
+      "^@application/(.*)$": [
+        "<rootDir>/src/@core/application/$1"
       ]
     }
   }
