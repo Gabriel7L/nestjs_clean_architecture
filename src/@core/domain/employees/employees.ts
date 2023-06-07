@@ -15,6 +15,7 @@ export default class Employees extends Basic {
     if (!props) {
       return;
     }
+    Employees.Validate(props);
     Object.assign(this, props);
   }
   static Create(props: EmployeesInput) {

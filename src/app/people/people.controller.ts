@@ -24,7 +24,6 @@ export class PeopleController {
 
   @Post()
   create(@Body() createPersonDto: CreatePersonDto, @Request() req) {
-    console.log(req.user);
     return this.peopleService.create(
       createPersonDto,
       parseInt(req.user.company),

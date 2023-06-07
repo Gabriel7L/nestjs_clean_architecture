@@ -1,7 +1,5 @@
-import { states } from '../src/@core/domain/utils/convertions/convert-states';
 import PeopleInMemoryRepository from '../src/@core/db/repositories/in-memory/people/people-in-memory.repository';
 import CreatePerson from '../src/@core/use-cases/people/create-person';
-import { PeopleTypeOrmRepository } from 'src/@core/db/repositories/typeorm/people/people-typeorm.repository';
 
 test('Should be able to create a person', async function () {
   const peopleRepo = new PeopleInMemoryRepository();
@@ -20,7 +18,9 @@ test('Should be able to create a person', async function () {
     {
       document: '',
       name: 'Gabriel',
-      dt_birth: new Date(),
+      dt_birth: new Date().toISOString(),
+      person_type: 'PF',
+      is_supplier: false,
     },
     [address, address],
   );

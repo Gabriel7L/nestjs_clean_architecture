@@ -1,12 +1,12 @@
 import { EmployeesInput } from '@application/employees/employees-input';
-import { PeopleValidator } from '@domain/people/validators/people.validator';
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
+import { IsValidDateOrStringDate } from '@domain/utils/validations/date-validation';
 import {
-  IsDateString,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
+  Matches,
   MaxLength,
 } from 'class-validator';
 
@@ -20,8 +20,8 @@ export class EmployeesRules {
   @MaxLength(100)
   position: string;
 
+  @IsValidDateOrStringDate('dt_hiring', { message: 'Birth date is invalid' })
   @IsOptional()
-  @IsDateString()
   dt_hiring: Date;
 
   @IsNumber()
@@ -30,6 +30,10 @@ export class EmployeesRules {
 
   @IsString()
   @IsNotEmpty()
+  @Matches(/^(2[0-3]|1[0-9]|0[1-9]):([0-5][0-9]):([0-5][0-9])$/, {
+    message:
+      'Carga horária inválida, o formato deve ser HH:MM:SS e valor máximo de 23:59:59',
+  })
   workload: string;
 
   @IsNumber()

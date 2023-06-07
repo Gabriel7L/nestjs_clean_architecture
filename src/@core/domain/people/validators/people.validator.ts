@@ -1,7 +1,6 @@
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
 import {
   IsBoolean,
-  IsDateString,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -9,6 +8,7 @@ import {
 } from 'class-validator';
 import { ValidateDocument } from '@domain/utils/validations/document-validations';
 import { PeopleInput } from 'src/@core/application/people/people-input';
+import { IsValidDateOrStringDate } from '@domain/utils/validations/date-validation';
 
 export class PeopleRules {
   @MaxLength(60)
@@ -29,7 +29,7 @@ export class PeopleRules {
   @IsBoolean()
   is_supplier: boolean;
 
-  @IsDateString()
+  @IsValidDateOrStringDate('dt_birth', { message: 'Birth date is invalid' })
   @IsNotEmpty()
   dt_birth: Date;
 

@@ -1,5 +1,4 @@
 import { Basic } from '@domain/basic/basic';
-import Orders from './orders';
 
 export default class OrderProducts extends Basic {
   id_product: number;
@@ -14,7 +13,7 @@ export default class OrderProducts extends Basic {
     discount?: number,
   ) {
     super();
-    if (!id_product) {
+    if (!value) {
       return;
     }
     this.id_product = id_product;

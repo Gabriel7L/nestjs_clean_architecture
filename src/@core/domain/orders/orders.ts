@@ -4,6 +4,7 @@ import OrderProducts from './order-products';
 import OrderServices from './order-services';
 import Services from '@domain/services/services';
 import People from '@domain/people/people';
+import { HttpException } from '@nestjs/common';
 
 export default class Orders extends Basic {
   description: string;
@@ -36,7 +37,7 @@ export default class Orders extends Basic {
         ),
       );
     } else {
-      throw new Error('Discount invalid');
+      throw new HttpException('Discount invalid', 400);
     }
   }
 
@@ -46,18 +47,20 @@ export default class Orders extends Basic {
         new OrderServices(service.id, service.price, quantity, discount),
       );
     } else {
-      throw new Error('Discount invalid');
+      throw new HttpException('Discount invalid', 400);
     }
   }
 
   getTotal() {
     let total = 0;
-    for (const orderProduct of this.orderProducts) {
+    this.orderProducts.forEach((orderProduct) => {
       total += orderProduct.getTotal();
-    }
-    for (const orderService of this.orderServices) {
+    });
+
+    this.orderServices.forEach((orderService) => {
       total += orderService.getTotal();
-    }
+    });
+
     this.total_value = total;
     return total;
   }
