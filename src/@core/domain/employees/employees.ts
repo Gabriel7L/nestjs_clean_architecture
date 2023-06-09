@@ -10,16 +10,17 @@ export default class Employees extends Basic {
   real_wage: number;
   workload: string;
   fiscal_wage: number;
-  constructor(props: EmployeesInput) {
+  constructor(props: EmployeesInput, id?: number) {
     super();
     if (!props) {
       return;
     }
     Employees.Validate(props);
     Object.assign(this, props);
+    this.id = id;
   }
-  static Create(props: EmployeesInput) {
-    return new Employees(props);
+  static Create(props: EmployeesInput, id?: number) {
+    return new Employees(props, id);
   }
 
   static Validate(props: EmployeesInput) {

@@ -3,7 +3,6 @@ import Products from '@domain/products/products';
 import OrderProducts from './order-products';
 import OrderServices from './order-services';
 import Services from '@domain/services/services';
-import People from '@domain/people/people';
 import { HttpException } from '@nestjs/common';
 
 export default class Orders extends Basic {

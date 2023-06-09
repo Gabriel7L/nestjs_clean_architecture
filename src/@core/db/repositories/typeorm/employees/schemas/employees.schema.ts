@@ -41,6 +41,7 @@ export const EmployeesSchema = new EntitySchema<Employees>({
       joinColumn: {
         name: 'id_person',
       },
+      eager: true,
     },
   },
 });
