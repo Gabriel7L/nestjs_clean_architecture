@@ -19,10 +19,6 @@ export const PeopleSchema = new EntitySchema<People>({
       type: 'varchar',
       length: 2,
     },
-    is_supplier: {
-      type: 'boolean',
-      default: false,
-    },
     name: {
       type: 'varchar',
       length: 255,

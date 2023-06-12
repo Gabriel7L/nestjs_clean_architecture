@@ -13,7 +13,6 @@ export default class People extends Basic {
   name: string;
   dt_birth: Date;
   person_type: string;
-  is_supplier: boolean;
   id_company: number;
   company: Companies;
   addresses: Addresses[];
@@ -28,7 +27,6 @@ export default class People extends Basic {
     this.name = props.name;
     this.dt_birth = props.dt_birth;
     this.person_type = props.person_type;
-    this.is_supplier = props.is_supplier;
     this.addresses = [];
     this.emails = [];
     this.id = id;

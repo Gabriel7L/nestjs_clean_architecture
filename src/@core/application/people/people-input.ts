@@ -3,5 +3,4 @@ export type PeopleInput = {
   name: string;
   dt_birth: Date;
   person_type: string;
-  is_supplier: boolean;
 };

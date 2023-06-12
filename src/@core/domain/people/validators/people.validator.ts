@@ -26,11 +26,8 @@ export class PeopleRules {
   @IsNotEmpty()
   person_type: string;
 
-  @IsBoolean()
-  is_supplier: boolean;
-
-  @IsValidDateOrStringDate('dt_birth', { message: 'Birth date is invalid' })
   @IsNotEmpty()
+  @IsValidDateOrStringDate('dt_birth', { message: 'Birth date is invalid' })
   dt_birth: Date;
 
   constructor(data: PeopleInput) {
