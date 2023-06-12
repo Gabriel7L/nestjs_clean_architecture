@@ -8,16 +8,26 @@ import { getDataSourceToken } from '@nestjs/typeorm';
 import CreateEmployee from '@use-cases/employees/create-employee';
 import IEmployeesRepository from '@domain/employees/repositories/iemployees.repository';
 import UpdateEmployee from '@use-cases/employees/update-employee';
+import { PeopleTypeOrmRepository } from 'src/@core/db/repositories/typeorm/people/people-typeorm.repository';
+import People from '@domain/people/people';
 
 @Module({
   controllers: [EmployeesController],
   providers: [
     EmployeesService,
     {
+      provide: PeopleTypeOrmRepository,
+      useFactory: (dataSource: DataSource) => {
+        return new PeopleTypeOrmRepository(dataSource.getRepository(People));
+      },
+      inject: [getDataSourceToken()],
+    },
+    {
       provide: EmployeesTypeOrmRepository,
       useFactory: (dataSource: DataSource) => {
         return new EmployeesTypeOrmRepository(
           dataSource.getRepository(Employees),
+          dataSource.getRepository(People),
         );
       },
       inject: [getDataSourceToken()],

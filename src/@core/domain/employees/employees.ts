@@ -2,6 +2,7 @@ import { Basic } from '@domain/basic/basic';
 import { EmployeesInput } from 'src/@core/application/employees/employees-input';
 import EmployeesValidatorFactory from './validators/employees.validator';
 import { HttpException } from '@nestjs/common';
+import People from '@domain/people/people';
 
 export default class Employees extends Basic {
   id_person: number;
@@ -10,6 +11,7 @@ export default class Employees extends Basic {
   real_wage: number;
   workload: string;
   fiscal_wage: number;
+  person: People;
   constructor(props: EmployeesInput, id?: number) {
     super();
     if (!props) {

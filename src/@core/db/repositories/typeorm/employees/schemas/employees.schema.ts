@@ -35,7 +35,7 @@ export const EmployeesSchema = new EntitySchema<Employees>({
     },
   },
   relations: {
-    id_person: {
+    person: {
       type: 'one-to-one',
       target: 'people',
       joinColumn: {
