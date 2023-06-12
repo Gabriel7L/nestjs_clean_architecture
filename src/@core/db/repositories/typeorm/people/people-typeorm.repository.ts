@@ -25,6 +25,15 @@ export class PeopleTypeOrmRepository implements IPeopleRepository {
     id_company: number,
   ): Promise<{ total: number; data: People[] }> {
     if (page < 0) page = 0;
+    const ordenar = {
+      field: 'id',
+      way: 'ASC',
+    };
+    if (Object.keys(People).includes(ordenar.field)) {
+      console.log('o id funciona');
+    } else {
+      console.log(Object.getOwnPropertyNames(People));
+    }
     const data = await this.peopleRepo.find({
       skip: page * recordsPerPage,
       take: recordsPerPage,
