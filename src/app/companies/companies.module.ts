@@ -7,27 +7,10 @@ import Companies from '@domain/companies/companies';
 import { getDataSourceToken } from '@nestjs/typeorm';
 import CreateCompany from '@use-cases/companies/create-company';
 import { ICompaniesRepository } from '@domain/companies/icompanies.repository';
+import { companiesProvider } from 'src/providers/companies.provider';
 
 @Module({
   controllers: [CompaniesController],
-  providers: [
-    CompaniesService,
-    {
-      provide: CompaniesTypeOrmRepository,
-      useFactory: (dataSource: DataSource) => {
-        return new CompaniesTypeOrmRepository(
-          dataSource.getRepository(Companies),
-        );
-      },
-      inject: [getDataSourceToken()],
-    },
-    {
-      provide: CreateCompany,
-      useFactory: (companiesRepo: ICompaniesRepository) => {
-        return new CreateCompany(companiesRepo);
-      },
-      inject: [CompaniesTypeOrmRepository],
-    },
-  ],
+  providers: [CompaniesService, ...Object.values(companiesProvider)],
 })
 export class CompaniesModule {}

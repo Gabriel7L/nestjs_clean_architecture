@@ -7,25 +7,10 @@ import Users from '@domain/users/users';
 import { getDataSourceToken } from '@nestjs/typeorm';
 import CreateUser from '@use-cases/users/create-user';
 import { IUsersRepository } from '@domain/users/iusers.repository';
+import { usersProvider } from 'src/providers/users.provider';
 
 @Module({
   controllers: [UsersController],
-  providers: [
-    UsersService,
-    {
-      provide: UsersTypeOrmRepository,
-      useFactory: (dataSource: DataSource) => {
-        return new UsersTypeOrmRepository(dataSource.getRepository(Users));
-      },
-      inject: [getDataSourceToken()],
-    },
-    {
-      provide: CreateUser,
-      useFactory: (userRepo: IUsersRepository) => {
-        return new CreateUser(userRepo);
-      },
-      inject: [UsersTypeOrmRepository],
-    },
-  ],
+  providers: [UsersService, ...Object.values(usersProvider)],
 })
 export class UsersModule {}

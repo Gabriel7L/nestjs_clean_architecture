@@ -10,42 +10,10 @@ import IEmployeesRepository from '@domain/employees/repositories/iemployees.repo
 import UpdateEmployee from '@use-cases/employees/update-employee';
 import { PeopleTypeOrmRepository } from 'src/@core/db/repositories/typeorm/people/people-typeorm.repository';
 import People from '@domain/people/people';
+import { employeesProvider } from 'src/providers/employees.provider';
 
 @Module({
   controllers: [EmployeesController],
-  providers: [
-    EmployeesService,
-    {
-      provide: PeopleTypeOrmRepository,
-      useFactory: (dataSource: DataSource) => {
-        return new PeopleTypeOrmRepository(dataSource.getRepository(People));
-      },
-      inject: [getDataSourceToken()],
-    },
-    {
-      provide: EmployeesTypeOrmRepository,
-      useFactory: (dataSource: DataSource) => {
-        return new EmployeesTypeOrmRepository(
-          dataSource.getRepository(Employees),
-          dataSource.getRepository(People),
-        );
-      },
-      inject: [getDataSourceToken()],
-    },
-    {
-      provide: CreateEmployee,
-      useFactory: (employeeRepo: IEmployeesRepository) => {
-        return new CreateEmployee(employeeRepo);
-      },
-      inject: [EmployeesTypeOrmRepository],
-    },
-    {
-      provide: UpdateEmployee,
-      useFactory: (employeeRepo: IEmployeesRepository) => {
-        return new UpdateEmployee(employeeRepo);
-      },
-      inject: [EmployeesTypeOrmRepository],
-    },
-  ],
+  providers: [EmployeesService, ...Object.values(employeesProvider)],
 })
 export class EmployeesModule {}
