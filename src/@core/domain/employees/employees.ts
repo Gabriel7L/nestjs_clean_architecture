@@ -3,6 +3,7 @@ import { EmployeesInput } from 'src/@core/application/employees/employees-input'
 import EmployeesValidatorFactory from './validators/employees.validator';
 import { HttpException } from '@nestjs/common';
 import People from '@domain/people/people';
+import Dependents from './dependents';
 
 export default class Employees extends Basic {
   id_person: number;
@@ -12,6 +13,7 @@ export default class Employees extends Basic {
   workload: string;
   fiscal_wage: number;
   person: People;
+  dependets: Dependents[];
   constructor(props: EmployeesInput, id?: number) {
     super();
     if (!props) {
