@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import GetByEmailUser from '@use-cases/users/get-by-email-user';
@@ -11,16 +11,17 @@ export class LoginService {
   ) {}
 
   async login(email: string, password: string) {
-    const users = await this.getByEmailUser.getByEmail(email);
-    if (bcrypt.compareSync(password, users.password)) {
+    const user = await this.getByEmailUser.getByEmail(email);
+    if (!user) throw new HttpException('Invalid email or password', 400);
+    if (bcrypt.compareSync(password, user.password)) {
       const payload = {
-        sub: users.id,
-        email: users.email,
-        company: users.id_company,
+        sub: user.id,
+        email: user.email,
+        company: user.id_company,
       };
 
       const rt = this.jwtService.sign(
-        { rsd: users.id },
+        { rsd: user.id },
         { secret: process.env.JWT_SECRET_REFRESH, expiresIn: '30d' },
       );
 
@@ -30,6 +31,6 @@ export class LoginService {
       });
 
       return { Token: 'Bearer ' + jwt, RefreshToken: rt };
-    } else return null;
+    } else throw new HttpException('Invalid email or password', 400);
   }
 }

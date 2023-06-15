@@ -10,8 +10,9 @@ export class AuthService {
   ) {}
   async signIn(email: string, password: string) {
     const user = await this.getByEmailUser.getByEmail(email);
+    if (!user) throw new HttpException('Invalid email or password', 400);
     if (!bcrypt.compareSync(password, user.password)) {
-      throw new HttpException('Invalid email or password', 401);
+      throw new HttpException('Invalid email or password', 400);
     }
     const payload = { sub: user.id, email: email };
     return {
