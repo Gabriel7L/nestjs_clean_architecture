@@ -28,8 +28,8 @@ export default class Users extends Basic {
     return new Users(props, id);
   }
   static Validate(props: UsersInput) {
-    const validator = UsersValidatorFactory.create();
-    validator.validate(props);
+    const validator = UsersValidatorFactory.Create();
+    validator.Validate(props);
     if (validator.errors) {
       throw new HttpException({ errors: validator.errors }, 404);
     }

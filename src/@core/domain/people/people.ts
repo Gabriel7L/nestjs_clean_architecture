@@ -42,8 +42,8 @@ export default class People extends Basic {
     this.emails.push(new Emails(email, id_person));
   }
   static Validate(props: PeopleInput) {
-    const validator = PeopleValidatorFactory.create();
-    validator.validate(props);
+    const validator = PeopleValidatorFactory.Create();
+    validator.Validate(props);
     if (validator.errors) {
       throw new HttpException({ errors: validator.errors }, 400);
     }

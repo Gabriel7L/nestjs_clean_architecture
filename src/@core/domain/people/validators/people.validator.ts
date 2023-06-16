@@ -35,12 +35,12 @@ export class PeopleRules {
   }
 }
 export class PeopleValidator extends ClassValidatorFields<PeopleRules> {
-  validate(data: PeopleInput): boolean {
+  Validate(data: PeopleInput): boolean {
     return super.validate(new PeopleRules(data));
   }
 }
 export default class PeopleValidatorFactory {
-  static create() {
+  static Create() {
     return new PeopleValidator();
   }
 }

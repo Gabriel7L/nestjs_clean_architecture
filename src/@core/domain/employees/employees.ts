@@ -29,7 +29,7 @@ export default class Employees extends Basic {
     return new Employees(props, id);
   }
 
-  AddDependt(props: DependentsInput, id?: number) {
+  AddDependent(props: DependentsInput, id?: number) {
     const dependent = Dependents.Create(props, id);
     this.dependets.push(dependent);
   }

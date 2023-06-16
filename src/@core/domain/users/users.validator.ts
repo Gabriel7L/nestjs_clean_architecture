@@ -39,13 +39,13 @@ export class UsersRules {
 }
 
 export class UsersValidator extends ClassValidatorFields<UsersRules> {
-  validate(data: UsersInput): boolean {
+  Validate(data: UsersInput): boolean {
     return super.validate(new UsersRules(data));
   }
 }
 
 export default class UsersValidatorFactory {
-  static create() {
+  static Create() {
     return new UsersValidator();
   }
 }
