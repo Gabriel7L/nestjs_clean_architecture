@@ -1,11 +1,5 @@
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
-import {
-  IsBoolean,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  MaxLength,
-} from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 import { ValidateDocument } from '@domain/utils/validations/document-validations';
 import { PeopleInput } from 'src/@core/application/people/people-input';
 import { IsValidDateOrStringDate } from '@domain/utils/validations/date-validation';

@@ -6,7 +6,6 @@ import {
   IsStrongPassword,
   IsNumber,
 } from 'class-validator';
-import Users from './users';
 import { ClassValidatorFields } from '@domain/utils/validations/class-validator-fields';
 import { UsersInput } from 'src/@core/application/users/users-input';
 

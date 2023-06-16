@@ -18,30 +18,30 @@ export class EmployeesController {
   constructor(private readonly employeesService: EmployeesService) {}
 
   @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto) {
-    return this.employeesService.create(createEmployeeDto);
+  Create(@Body() createEmployeeDto: CreateEmployeeDto) {
+    return this.employeesService.Create(createEmployeeDto);
   }
 
   @Get()
-  findAll() {
-    return this.employeesService.findAll();
+  FindAll() {
+    return this.employeesService.FindAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.employeesService.findOne(+id);
+  FindOne(@Param('id') id: string) {
+    return this.employeesService.FindOne(+id);
   }
 
   @Put(':id')
-  update(
+  Update(
     @Param('id') id: string,
     @Body() updateEmployeeDto: UpdateEmployeeDto,
   ) {
-    return this.employeesService.update(+id, updateEmployeeDto);
+    return this.employeesService.Update(+id, updateEmployeeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.employeesService.remove(+id);
+  Remove(@Param('id') id: string) {
+    return this.employeesService.Remove(+id);
   }
 }
