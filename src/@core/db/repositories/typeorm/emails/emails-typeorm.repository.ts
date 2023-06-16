@@ -1,5 +1,5 @@
 import Emails from '@domain/emails/emails';
-import { IEmailsRepository } from '@domain/emails/iemails.repository';
+import { IEmailsRepository } from '@domain/emails/repositories/iemails.repository';
 import { Repository } from 'typeorm';
 
 export class EmailsTypeOrmRepository implements IEmailsRepository {
