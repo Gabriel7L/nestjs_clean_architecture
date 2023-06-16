@@ -6,23 +6,23 @@ import CreateCompany from '@use-cases/companies/create-company';
 @Injectable()
 export class CompaniesService {
   constructor(private createCompany: CreateCompany) {}
-  create(createCompanyDto: CreateCompanyDto) {
-    return this.createCompany.createCompany(createCompanyDto);
+  Create(createCompanyDto: CreateCompanyDto) {
+    return this.createCompany.CreateCompany(createCompanyDto);
   }
 
-  findAll() {
+  FindAll() {
     return `This action returns all companies`;
   }
 
-  findOne(id: number) {
+  FindOne(id: number) {
     return `This action returns a #${id} company`;
   }
 
-  update(id: number, updateCompanyDto: UpdateCompanyDto) {
+  Update(id: number, updateCompanyDto: UpdateCompanyDto) {
     return `This action updates a #${id} company`;
   }
 
-  remove(id: number) {
+  Remove(id: number) {
     return `This action removes a #${id} company`;
   }
 }

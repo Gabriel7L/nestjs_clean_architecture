@@ -6,14 +6,14 @@ import { Repository } from 'typeorm';
 export class CompaniesTypeOrmRepository implements ICompaniesRepository {
   constructor(private companiesRepo: Repository<Companies>) {}
 
-  async create(item: Companies): Promise<Companies> {
+  async Create(item: Companies): Promise<Companies> {
     const data = this.companiesRepo.create(item);
     return await this.companiesRepo.save(data);
   }
-  update(item: Companies): Promise<Companies> {
+  Update(item: Companies): Promise<Companies> {
     throw new Error('Method not implemented.');
   }
-  async getById(id: number): Promise<Companies> {
+  async GetById(id: number): Promise<Companies> {
     const company = await this.companiesRepo.findOne({
       where: {
         id: id,
@@ -22,7 +22,7 @@ export class CompaniesTypeOrmRepository implements ICompaniesRepository {
     if (company) return company;
     throw new HttpException('Company not found', 404);
   }
-  async getAll(
+  async GetAll(
     page: number,
     recordsPerPage: number,
   ): Promise<{ total: number; data: Companies[] }> {

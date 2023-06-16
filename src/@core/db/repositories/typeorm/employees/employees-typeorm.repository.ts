@@ -11,25 +11,25 @@ export default class EmployeesTypeOrmRepository
     private employeesRepo: Repository<Employees>,
     private peopleRepo: Repository<People>,
   ) {}
-  findByName(name: string): Promise<Employees[]> {
+  FindByName(name: string): Promise<Employees[]> {
     throw new Error('Method not implemented.');
   }
-  async create(item: Employees): Promise<Employees> {
+  async Create(item: Employees): Promise<Employees> {
     if (!(await this.peopleRepo.findOneBy({ id: item.id_person })))
       throw new HttpException('Person not found.', 400);
     const data = this.employeesRepo.create(item);
     return await this.employeesRepo.save(data);
   }
-  async update(item: Employees): Promise<Employees> {
+  async Update(item: Employees): Promise<Employees> {
     if (!(await this.peopleRepo.findOneBy({ id: item.id_person })))
       throw new HttpException('Person not found.', 400);
     const data = await this.employeesRepo.preload(item);
     return await this.employeesRepo.save(data);
   }
-  async getById(id: number): Promise<Employees> {
+  async GetById(id: number): Promise<Employees> {
     return await this.employeesRepo.findOneBy({ id: id });
   }
-  async getAll(
+  async GetAll(
     page = 0,
     recordsPerPage = 10,
     id_company: number,

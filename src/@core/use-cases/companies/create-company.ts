@@ -4,7 +4,7 @@ import { ICompaniesRepository } from '@domain/companies/icompanies.repository';
 
 export default class CreateCompany {
   constructor(private companiesRepo: ICompaniesRepository) {}
-  async createCompany(props: CompaniesInput) {
+  async CreateCompany(props: CompaniesInput) {
     const data = Companies.Create(props);
     const company = await this.companiesRepo.Create(data);
     return company;

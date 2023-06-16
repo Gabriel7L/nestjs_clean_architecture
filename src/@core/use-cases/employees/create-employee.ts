@@ -6,7 +6,7 @@ export default class CreateEmployee {
   constructor(private employeesRepo: IEmployeesRepository) {}
   async CreateEmployee(props: EmployeesInput) {
     const data = Employees.Create(props);
-    const employee = await this.employeesRepo.create(data);
+    const employee = await this.employeesRepo.Create(data);
     return employee;
   }
 }
