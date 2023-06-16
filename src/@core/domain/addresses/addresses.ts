@@ -38,8 +38,8 @@ export default class Addresses extends Basic {
     return new Addresses(props, id_person, id);
   }
   static Validate(props: AddressesInput) {
-    const validator = AddressesValidatorFactory.create();
-    validator.validate(props);
+    const validator = AddressesValidatorFactory.Create();
+    validator.Validate(props);
     if (validator.errors) {
       throw new HttpException({ errors: validator.errors }, 400);
     }

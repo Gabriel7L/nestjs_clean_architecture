@@ -12,12 +12,12 @@ export class EmailsRules {
 }
 
 export class EmailsValidator extends ClassValidatorFields<EmailsRules> {
-  validate(data: EmailsInput): boolean {
+  Validate(data: EmailsInput): boolean {
     return super.validate(new EmailsRules(data));
   }
 }
 export default class EmailsValidatorFactory {
-  static create() {
+  static Create() {
     return new EmailsValidator();
   }
 }

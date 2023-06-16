@@ -21,8 +21,8 @@ export default class Companies extends Basic {
   }
 
   static Validate(props: CompaniesInput) {
-    const validator = CompaniesValidatorFactory.create();
-    validator.validate(props);
+    const validator = CompaniesValidatorFactory.Create();
+    validator.Validate(props);
     if (validator.errors) {
       throw new HttpException({ errors: validator.errors }, 400);
     }

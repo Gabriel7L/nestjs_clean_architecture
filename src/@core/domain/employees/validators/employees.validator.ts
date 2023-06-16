@@ -46,12 +46,12 @@ export class EmployeesRules {
 }
 
 export class EmployeesValidator extends ClassValidatorFields<EmployeesRules> {
-  validate(data: EmployeesInput): boolean {
+  Validate(data: EmployeesInput): boolean {
     return super.validate(new EmployeesRules(data));
   }
 }
 export default class EmployeesValidatorFactory {
-  static create() {
+  static Create() {
     return new EmployeesValidator();
   }
 }

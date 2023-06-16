@@ -4,6 +4,7 @@ import EmployeesValidatorFactory from './validators/employees.validator';
 import { HttpException } from '@nestjs/common';
 import People from '@domain/people/people';
 import Dependents from './dependents';
+import { DependentsInput } from '@application/employees/dependents-input';
 
 export default class Employees extends Basic {
   id_person: number;
@@ -21,15 +22,21 @@ export default class Employees extends Basic {
     }
     Employees.Validate(props);
     Object.assign(this, props);
+    this.dependets = [];
     this.id = id;
   }
   static Create(props: EmployeesInput, id?: number) {
     return new Employees(props, id);
   }
 
+  AddDependt(props: DependentsInput, id?: number) {
+    const dependent = Dependents.Create(props, id);
+    this.dependets.push(dependent);
+  }
+
   static Validate(props: EmployeesInput) {
-    const validator = EmployeesValidatorFactory.create();
-    validator.validate(props);
+    const validator = EmployeesValidatorFactory.Create();
+    validator.Validate(props);
     if (validator.errors) {
       throw new HttpException({ errors: validator.errors }, 400);
     }

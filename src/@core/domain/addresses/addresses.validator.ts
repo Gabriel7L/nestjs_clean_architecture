@@ -41,12 +41,12 @@ export class AddressesRules {
   }
 }
 export class AddressesValidator extends ClassValidatorFields<AddressesRules> {
-  validate(data: AddressesInput): boolean {
+  Validate(data: AddressesInput): boolean {
     return super.validate(new AddressesRules(data));
   }
 }
 export default class AddressesValidatorFactory {
-  static create() {
+  static Create() {
     return new AddressesValidator();
   }
 }

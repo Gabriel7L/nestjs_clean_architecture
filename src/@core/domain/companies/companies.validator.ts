@@ -23,12 +23,12 @@ export class CompaniesRules {
   }
 }
 export class CompaniesValidator extends ClassValidatorFields<CompaniesRules> {
-  validate(data: CompaniesInput) {
+  Validate(data: CompaniesInput) {
     return super.validate(new CompaniesRules(data));
   }
 }
 export default class CompaniesValidatorFactory {
-  static create() {
+  static Create() {
     return new CompaniesValidator();
   }
 }
