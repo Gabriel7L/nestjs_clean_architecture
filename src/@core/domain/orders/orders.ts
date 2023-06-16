@@ -36,7 +36,7 @@ export default class Orders extends Basic {
         ),
       );
     } else {
-      throw new HttpException('Discount invalid', 400);
+      throw new HttpException('Invalid discount', 400);
     }
   }
 
@@ -46,7 +46,7 @@ export default class Orders extends Basic {
         new OrderServices(service.id, service.price, quantity, discount),
       );
     } else {
-      throw new HttpException('Discount invalid', 400);
+      throw new HttpException('Invalid discount', 400);
     }
   }
 
