@@ -4,6 +4,7 @@ import OrderProducts from './order-products';
 import OrderServices from './order-services';
 import Services from '@domain/services/services';
 import { HttpException } from '@nestjs/common';
+import { OrderInput } from '@application/orders/order-input';
 
 export default class Orders extends Basic {
   description: string;
@@ -13,13 +14,12 @@ export default class Orders extends Basic {
   discount: number;
   status: string;
   id_client: number;
-  constructor(id_client: number) {
+  constructor(props: OrderInput, id_client: number) {
     super();
     if (!id_client) {
       return;
     }
     this.total_value = 0;
-    this.discount = 0;
     this.id_client = id_client;
     this.orderProducts = [];
     this.orderServices = [];
@@ -59,7 +59,6 @@ export default class Orders extends Basic {
     this.orderServices.forEach((orderService) => {
       total += orderService.getTotal();
     });
-
     this.total_value = total;
     return total;
   }
