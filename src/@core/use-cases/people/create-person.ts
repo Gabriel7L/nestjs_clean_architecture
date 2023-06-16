@@ -5,7 +5,7 @@ import { AddressesInput } from 'src/@core/application/addresses/addresses-input'
 import { EmailsInput } from 'src/@core/application/emails/emails-input';
 export default class CreatePerson {
   constructor(private peopleRepo: IPeopleRepository) {}
-  async createPerson(
+  async CreatePerson(
     props: PeopleInput,
     addresses?: AddressesInput[],
     emails?: EmailsInput[],
@@ -22,7 +22,7 @@ export default class CreatePerson {
         person.AddEmail(email);
       });
     }
-    const data = await this.peopleRepo.create(person);
+    const data = await this.peopleRepo.Create(person);
     return data;
   }
 }

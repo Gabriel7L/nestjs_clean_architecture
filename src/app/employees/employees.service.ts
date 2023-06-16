@@ -11,23 +11,23 @@ export class EmployeesService {
     private updateEmployee: UpdateEmployee,
   ) {}
 
-  async create(createEmployeeDto: CreateEmployeeDto) {
-    return await this.createEmployee.createEmployee(createEmployeeDto);
+  async Create(createEmployeeDto: CreateEmployeeDto) {
+    return await this.createEmployee.CreateEmployee(createEmployeeDto);
   }
 
-  findAll() {
+  FindAll() {
     return `This action returns all employees`;
   }
 
-  findOne(id: number) {
+  FindOne(id: number) {
     return `This action returns a #${id} employee`;
   }
 
-  async update(id: number, updateEmployeeDto: UpdateEmployeeDto) {
-    return await this.updateEmployee.updateEmployee(updateEmployeeDto, id);
+  async Update(id: number, updateEmployeeDto: UpdateEmployeeDto) {
+    return await this.updateEmployee.UpdateEmployee(updateEmployeeDto, id);
   }
 
-  remove(id: number) {
+  Remove(id: number) {
     return `This action removes a #${id} employee`;
   }
 }

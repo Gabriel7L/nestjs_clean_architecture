@@ -6,17 +6,17 @@ import { Repository } from 'typeorm';
 export class UsersTypeOrmRepository implements IUsersRepository {
   constructor(private userRepo: Repository<Users>) {}
 
-  async create(item: Users): Promise<Users> {
-    if (await this.getByEmail(item.email)) {
+  async Create(item: Users): Promise<Users> {
+    if (await this.GetByEmail(item.email)) {
       throw new HttpException('User already exists', 400);
     }
     const data = this.userRepo.create(item);
     return await this.userRepo.save(data);
   }
-  update(item: Users): Promise<Users> {
+  Update(item: Users): Promise<Users> {
     throw new Error('Method not implemented.');
   }
-  async getById(id: number): Promise<Users> {
+  async GetById(id: number): Promise<Users> {
     const user = await this.userRepo.findOne({
       where: {
         id,
@@ -25,7 +25,7 @@ export class UsersTypeOrmRepository implements IUsersRepository {
     if (user) return user;
     throw new HttpException('User not found', 404);
   }
-  async getAll(
+  async GetAll(
     page: number,
     recordsPerPage: number,
   ): Promise<{ total: number; data: Users[] }> {
@@ -37,7 +37,7 @@ export class UsersTypeOrmRepository implements IUsersRepository {
     const total = Math.ceil(count / recordsPerPage);
     return { data, total };
   }
-  async getByEmail(email: string): Promise<Users> {
+  async GetByEmail(email: string): Promise<Users> {
     const user = await this.userRepo.findOneBy({ email });
     if (user) return user;
     return null;

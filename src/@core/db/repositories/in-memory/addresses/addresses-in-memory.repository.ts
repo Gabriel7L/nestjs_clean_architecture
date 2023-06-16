@@ -5,13 +5,13 @@ export default class AddressesInMemoryRepository
   implements IAddressesRepository
 {
   items: Addresses[] = [];
-  async saveAddresses(addresses: Addresses[]): Promise<Addresses[]> {
+  async SaveAddresses(addresses: Addresses[]): Promise<Addresses[]> {
     addresses.forEach((address) => {
       this.items.push(address);
     });
     return Promise.resolve(this.items);
   }
-  async getAddressesByIdPerson(personId: number): Promise<Addresses[]> {
+  async GetAddressesByIdPerson(personId: number): Promise<Addresses[]> {
     return Promise.resolve(
       this.items.filter((address) => address.id_person === personId),
     );

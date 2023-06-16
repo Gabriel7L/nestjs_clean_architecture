@@ -6,11 +6,11 @@ import { Repository } from 'typeorm';
 export class PeopleTypeOrmRepository implements IPeopleRepository {
   constructor(private peopleRepo: Repository<People>) {}
 
-  async create(person: People): Promise<People> {
+  async Create(person: People): Promise<People> {
     const data = this.peopleRepo.create(person);
     return await this.peopleRepo.save(data);
   }
-  async getById(id: number): Promise<People> {
+  async GetById(id: number): Promise<People> {
     const person = await this.peopleRepo.findOne({
       where: {
         id: id,
@@ -19,7 +19,7 @@ export class PeopleTypeOrmRepository implements IPeopleRepository {
     if (person) return person;
     throw new HttpException('Person not found', 404);
   }
-  async getAll(
+  async GetAll(
     page = 0,
     recordsPerPage = 10,
     id_company: number,
@@ -39,7 +39,7 @@ export class PeopleTypeOrmRepository implements IPeopleRepository {
     const total = count;
     return { data, total };
   }
-  async getByDocument(document: string, id_company: number): Promise<People> {
+  async GetByDocument(document: string, id_company: number): Promise<People> {
     const person = await this.peopleRepo.findOne({
       where: {
         document: document,
@@ -48,7 +48,7 @@ export class PeopleTypeOrmRepository implements IPeopleRepository {
     });
     return person;
   }
-  async update(item: People): Promise<People> {
+  async Update(item: People): Promise<People> {
     const person = await this.peopleRepo.preload(item);
     return await this.peopleRepo.save(person);
   }

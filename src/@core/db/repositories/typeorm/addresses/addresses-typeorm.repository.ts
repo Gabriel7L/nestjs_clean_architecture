@@ -4,10 +4,10 @@ import { Repository } from 'typeorm';
 
 export class AddressesTypeOrmRepository implements IAddressesRepository {
   constructor(private addressRepo: Repository<Addresses>) {}
-  async saveAddresses(addresses: Addresses[]): Promise<Addresses[]> {
+  async SaveAddresses(addresses: Addresses[]): Promise<Addresses[]> {
     return await this.addressRepo.save(addresses);
   }
-  async getAddressesByIdPerson(personId: number): Promise<Addresses[]> {
+  async GetAddressesByIdPerson(personId: number): Promise<Addresses[]> {
     return await this.addressRepo.find({
       where: {
         id_person: personId,

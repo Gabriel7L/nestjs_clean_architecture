@@ -14,8 +14,8 @@ export class PeopleService {
     private getPeople: GetPeople,
     private getPersonByDocument: GetPersonByDocument,
   ) {}
-  create(createPersonDto: CreatePersonDto, id_company: number) {
-    return this.createPerson.createPerson(
+  Create(createPersonDto: CreatePersonDto, id_company: number) {
+    return this.createPerson.CreatePerson(
       createPersonDto,
       createPersonDto.addresses,
       createPersonDto.emails,
@@ -23,24 +23,24 @@ export class PeopleService {
     );
   }
 
-  async findAll(page: number, recordsPerPage: number, id_company: number) {
-    return await this.getPeople.getPeople(page, recordsPerPage, id_company);
+  async FindAll(page: number, recordsPerPage: number, id_company: number) {
+    return await this.getPeople.GetPeople(page, recordsPerPage, id_company);
   }
 
-  findOne(id: number) {
-    return this.getPerson.getPersonById(id);
+  FindOne(id: number) {
+    return this.getPerson.GetPersonById(id);
   }
-  async findByDocument(document: string, id_company: number) {
-    return await this.getPersonByDocument.getPersonByDocument(
+  async FindByDocument(document: string, id_company: number) {
+    return await this.getPersonByDocument.GetPersonByDocument(
       document,
       id_company,
     );
   }
-  update(id: number, updatePersonDto: UpdatePersonDto) {
+  Update(id: number, updatePersonDto: UpdatePersonDto) {
     return `This action updates a ${id} ${updatePersonDto.document} person`;
   }
 
-  remove(id: number) {
+  Remove(id: number) {
     return `This action removes a #${id} person`;
   }
 }

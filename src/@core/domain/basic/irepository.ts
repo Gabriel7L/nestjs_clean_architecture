@@ -1,8 +1,8 @@
 export interface IRepository<T> {
-  create(item: T): Promise<T>;
-  update(item: T): Promise<T>;
-  getById(id: number): Promise<T>;
-  getAll(
+  Create(item: T): Promise<T>;
+  Update(item: T): Promise<T>;
+  GetById(id: number): Promise<T>;
+  GetAll(
     page: number,
     recordsPerPage: number,
     id_company?: number,

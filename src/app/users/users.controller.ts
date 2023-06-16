@@ -21,27 +21,27 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  Create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.Create(createUserDto);
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  FindAll() {
+    return this.usersService.FindAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  FindOne(@Param('id') id: string) {
+    return this.usersService.FindOne(+id);
   }
 
   @Patch(':id')
-  update(@Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(updateUserDto);
+  Update(@Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.Update(updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.usersService.remove(+id);
+  Remove(@Param('id') id: number) {
+    return this.usersService.Remove(+id);
   }
 }

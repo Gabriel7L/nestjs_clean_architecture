@@ -6,7 +6,7 @@ export default class CreateCompany {
   constructor(private companiesRepo: ICompaniesRepository) {}
   async createCompany(props: CompaniesInput) {
     const data = Companies.Create(props);
-    const company = await this.companiesRepo.create(data);
+    const company = await this.companiesRepo.Create(data);
     return company;
   }
 }

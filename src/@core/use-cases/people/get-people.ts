@@ -2,8 +2,8 @@ import { IPeopleRepository } from 'src/@core/domain/people/repositories/ipeople.
 
 export default class GetPeople {
   constructor(private peopleRepo: IPeopleRepository) {}
-  async getPeople(page: number, recordsPerPage: number, id_company: number) {
-    const people = await this.peopleRepo.getAll(
+  async GetPeople(page: number, recordsPerPage: number, id_company: number) {
+    const people = await this.peopleRepo.GetAll(
       page,
       recordsPerPage,
       id_company,

@@ -24,7 +24,7 @@ export class PeopleController {
 
   @Post()
   create(@Body() createPersonDto: CreatePersonDto, @Request() req) {
-    return this.peopleService.create(
+    return this.peopleService.Create(
       createPersonDto,
       parseInt(req.user.company),
     );
@@ -36,16 +36,16 @@ export class PeopleController {
     @Query('limit') limit: number,
     @Request() req,
   ) {
-    return this.peopleService.findAll(page, limit, parseInt(req.user.company));
+    return this.peopleService.FindAll(page, limit, parseInt(req.user.company));
   }
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.peopleService.findOne(id);
+    return this.peopleService.FindOne(id);
   }
   @Get('/bydocument/:document')
   findByDocument(@Param('document') document: string, @Request() req) {
-    return this.peopleService.findByDocument(
+    return this.peopleService.FindByDocument(
       document,
       parseInt(req.user.company),
     );
@@ -53,11 +53,11 @@ export class PeopleController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
-    return this.peopleService.update(+id, updatePersonDto);
+    return this.peopleService.Update(+id, updatePersonDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.peopleService.remove(+id);
+    return this.peopleService.Remove(+id);
   }
 }

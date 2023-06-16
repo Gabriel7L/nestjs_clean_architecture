@@ -1,5 +1,4 @@
 import { Basic } from '@domain/basic/basic';
-import Orders from './orders';
 
 export default class OrderServices extends Basic {
   id_service: number;

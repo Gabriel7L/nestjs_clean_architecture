@@ -5,10 +5,10 @@ import { HttpException } from '@nestjs/common';
 
 export default class UpdateEmployee {
   constructor(private employeesRepo: IEmployeesRepository) {}
-  async updateEmployee(props: EmployeesInput, id: number) {
-    if (!(await this.employeesRepo.getById(id)))
+  async UpdateEmployee(props: EmployeesInput, id: number) {
+    if (!(await this.employeesRepo.GetById(id)))
       throw new HttpException('Employee not found', 404);
     const data = Employees.Create(props, id);
-    return await this.employeesRepo.update(data);
+    return await this.employeesRepo.Update(data);
   }
 }

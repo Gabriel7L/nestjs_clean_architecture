@@ -6,7 +6,7 @@ export default class CreateUser {
   constructor(private usersRepo: IUsersRepository) {}
   async createUser(props: UsersInput) {
     const data = Users.Create(props);
-    const user = await this.usersRepo.create(data);
+    const user = await this.usersRepo.Create(data);
     return user;
   }
 }
