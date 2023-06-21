@@ -14,13 +14,12 @@ test('Should be able to create a person', async function () {
     zip_code: '35700-070',
     district: 'Centro',
   };
-  const person = await createPerson.createPerson(
+  const person = await createPerson.CreatePerson(
     {
       document: '',
       name: 'Gabriel',
-      dt_birth: new Date().toISOString(),
+      dt_birth: new Date(),
       person_type: 'PF',
-      is_supplier: false,
     },
     [address, address],
   );

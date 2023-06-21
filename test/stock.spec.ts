@@ -1,7 +1,7 @@
 import Stocks from '@domain/stocks/stocks';
 
 describe('Stock tests', () => {
-  it('shoulb be able to create a stock and create products stock and operates', () => {
+  it('shoulb be able to create a stock and add products stock and operates', () => {
     const stock = new Stocks(
       {
         stock: 'teste',
@@ -12,7 +12,7 @@ describe('Stock tests', () => {
     );
     expect(stock.stock).toBe('teste');
     expect(stock.active).toBeTruthy();
-    stock.CreateProductsStock({ id_product: 1, quantity: 10 });
+    stock.AddProductsStock({ id_product: 1, quantity: 10 });
 
     expect(stock.stockItems[0].id_product).toBe(1);
     expect(stock.stockItems[0].quantity).toBe(10);
@@ -25,7 +25,7 @@ describe('Stock tests', () => {
 
     stock.AddProductsStock({ id_product: 3, quantity: 10 });
 
-    expect(stock.stockItems.length).toBe(1);
+    expect(stock.stockItems.length).toBe(2);
     expect(stock.stockItems[0].quantity).toBe(9);
   });
 });

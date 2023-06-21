@@ -39,7 +39,7 @@ test('Deve criar uma ordem de produtos', () => {
   };
   const product1 = new Products(input, 1);
   const product2 = new Products(input2, 1);
-  const order = new Orders(1);
+  const order = new Orders({ description: 'Teste', discount: 0 }, 1);
   order.addProduct(product1, 3);
   order.addProduct(product2, 1, 0.2);
   expect(order.total_value).toBe(0);
@@ -66,8 +66,8 @@ test('Deve retornar erro no desconto', () => {
     active: true,
   };
   const product1 = new Products(input, 1);
-  const order = new Orders(1);
+  const order = new Orders({ description: 'Teste', discount: 0 }, 1);
   expect(() => order.addProduct(product1, 3, -0.2)).toThrow(
-    new Error('Discount invalid'),
+    new Error('Invalid discount'),
   );
 });

@@ -4,14 +4,7 @@ import { Repository } from 'typeorm';
 
 export class AddressesTypeOrmRepository implements IAddressesRepository {
   constructor(private addressRepo: Repository<Addresses>) {}
-  async SaveAddresses(addresses: Addresses[]): Promise<Addresses[]> {
-    return await this.addressRepo.save(addresses);
-  }
-  async GetAddressesByIdPerson(personId: number): Promise<Addresses[]> {
-    return await this.addressRepo.find({
-      where: {
-        id_person: personId,
-      },
-    });
+  async Delete(id: number): Promise<void> {
+    await this.addressRepo.delete(id);
   }
 }

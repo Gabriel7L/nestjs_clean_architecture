@@ -16,4 +16,7 @@ export default class AddressesInMemoryRepository
       this.items.filter((address) => address.id_person === personId),
     );
   }
+  async Delete(id: number): Promise<void> {
+    this.items = this.items.filter((item) => item.id !== id);
+  }
 }
