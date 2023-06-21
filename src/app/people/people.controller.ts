@@ -11,7 +11,6 @@ import {
   Request,
 } from '@nestjs/common';
 import { CreatePersonDto } from './dto/create-person.dto';
-import { UpdatePersonDto } from './dto/update-person.dto';
 import { PeopleService } from './people.service';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtGuard } from '../auth/login/jwt.guard';
@@ -52,7 +51,7 @@ export class PeopleController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
+  update(@Param('id') id: string, @Body() updatePersonDto: CreatePersonDto) {
     return this.peopleService.Update(+id, updatePersonDto);
   }
 

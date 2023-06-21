@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
-import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Employees')
@@ -35,7 +34,7 @@ export class EmployeesController {
   @Put(':id')
   Update(
     @Param('id') id: string,
-    @Body() updateEmployeeDto: UpdateEmployeeDto,
+    @Body() updateEmployeeDto: CreateEmployeeDto,
   ) {
     return this.employeesService.Update(+id, updateEmployeeDto);
   }

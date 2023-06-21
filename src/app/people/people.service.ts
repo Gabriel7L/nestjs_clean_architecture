@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePersonDto } from './dto/create-person.dto';
-import { UpdatePersonDto } from './dto/update-person.dto';
 import CreatePerson from '@use-cases/people/create-person';
 import GetPerson from '@use-cases/people/get-person-by-id';
 import GetPeople from '@use-cases/people/get-people';
@@ -36,8 +35,8 @@ export class PeopleService {
       id_company,
     );
   }
-  Update(id: number, updatePersonDto: UpdatePersonDto) {
-    return `This action updates a ${id} ${updatePersonDto.document} person`;
+  Update(id: number, updatePersonDto: CreatePersonDto) {
+    return `This action updates a ${id} person`;
   }
 
   Remove(id: number) {

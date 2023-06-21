@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
-import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import CreateEmployee from '@use-cases/employees/create-employee';
 import UpdateEmployee from '@use-cases/employees/update-employee';
 
@@ -23,7 +22,7 @@ export class EmployeesService {
     return `This action returns a #${id} employee`;
   }
 
-  async Update(id: number, updateEmployeeDto: UpdateEmployeeDto) {
+  async Update(id: number, updateEmployeeDto: CreateEmployeeDto) {
     return await this.updateEmployee.UpdateEmployee(updateEmployeeDto, id);
   }
 

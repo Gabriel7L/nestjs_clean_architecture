@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
-import { UpdateCompanyDto } from './dto/update-company.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtGuard } from '../auth/login/jwt.guard';
 
@@ -36,7 +35,7 @@ export class CompaniesController {
   }
 
   @Patch(':id')
-  Update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
+  Update(@Param('id') id: string, @Body() updateCompanyDto: CreateCompanyDto) {
     return this.companiesService.Update(+id, updateCompanyDto);
   }
 
