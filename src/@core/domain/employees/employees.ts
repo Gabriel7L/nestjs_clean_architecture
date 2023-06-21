@@ -3,8 +3,8 @@ import { EmployeesInput } from 'src/@core/application/employees/employees-input'
 import EmployeesValidatorFactory from './validators/employees.validator';
 import { HttpException } from '@nestjs/common';
 import People from '@domain/people/people';
-import Dependents from './dependents';
-import { DependentsInput } from '@application/employees/dependents-input';
+import { DependentsInput } from '@application/dependents/dependents-input';
+import Dependents from '@domain/dependents/dependents';
 
 export default class Employees extends Basic {
   id_person: number;
