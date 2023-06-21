@@ -1,4 +1,8 @@
+import { config as readEnv } from 'dotenv';
+import { join } from 'path';
 import { DataSource, DataSourceOptions } from 'typeorm';
+
+readEnv({ path: join(__dirname, '../../../../.env') });
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   database: 'clean_arc',
