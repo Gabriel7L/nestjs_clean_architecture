@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { JwtGuard } from '../auth/login/jwt.guard';
 
@@ -36,8 +35,8 @@ export class UsersController {
   }
 
   @Patch(':id')
-  Update(@Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.Update(updateUserDto);
+  Update(@Param('id') id: number, @Body() updateUserDto: CreateUserDto) {
+    return this.usersService.Update(id, updateUserDto);
   }
 
   @Delete(':id')
