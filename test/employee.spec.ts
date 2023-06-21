@@ -14,4 +14,9 @@ test('Deve criar um funcionario', () => {
   expect(employee.dt_hiring.toISOString()).toBe(
     new Date('2023-05-02').toISOString(),
   );
+  expect(employee.id_person).toBe(1);
+  expect(employee.position).toBe('Supervisor');
+  expect(employee.workload).toBe('08:00:00');
+  expect(employee.real_wage).toBe(1535.4);
+  expect(employee.fiscal_wage).toBe(1325.6);
 });
