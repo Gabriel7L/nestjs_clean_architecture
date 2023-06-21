@@ -8,6 +8,7 @@ import { UsersModule } from './app/users/users.module';
 import { AuthModule } from './app/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { EmployeesModule } from './app/employees/employees.module';
+import { AddressesModule } from './app/addresses/addresses.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { EmployeesModule } from './app/employees/employees.module';
     UsersModule,
     AuthModule,
     EmployeesModule,
+    AddressesModule,
   ],
   controllers: [AppController],
   providers: [],
