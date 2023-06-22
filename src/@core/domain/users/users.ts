@@ -1,10 +1,10 @@
 import { Basic } from '@domain/basic/basic';
 import People from '@domain/people/people';
 import UsersValidatorFactory from './users.validator';
-import { HttpException } from '@nestjs/common';
 import Companies from '@domain/companies/companies';
 import * as bcrypt from 'bcrypt';
 import { UsersInput } from 'src/@core/application/users/users-input';
+import ValidationError from '@domain/utils/errors/validation-error';
 
 export default class Users extends Basic {
   email: string;
@@ -31,7 +31,7 @@ export default class Users extends Basic {
     const validator = UsersValidatorFactory.Create();
     validator.Validate(props);
     if (validator.errors) {
-      throw new HttpException({ errors: validator.errors }, 404);
+      new ValidationError({ errors: validator.errors }).BadRequest();
     }
   }
 }
